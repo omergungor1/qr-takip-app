@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Gezgin Paket | QR ile Turizm Takip",
+  title: "Gezgin Paket",
   description: "QR kod ile takip edilen gezgin paketlerin Türkiye yolculuğunu haritada takip edin.",
 };
 

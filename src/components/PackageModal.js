@@ -1,17 +1,13 @@
 'use client'
 
-import { useState } from 'react'
 import Image from 'next/image'
 
 export default function PackageModal({ package: pkg, onClose }) {
-  const [playing, setPlaying] = useState(false)
   const scans = (pkg?.package_scans || []).sort(
     (a, b) => new Date(a.created_at) - new Date(b.created_at)
   )
 
   if (!pkg) return null
-
-  const togglePlay = () => setPlaying((p) => !p)
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50" onClick={onClose}>
@@ -43,12 +39,6 @@ export default function PackageModal({ package: pkg, onClose }) {
               {[...new Set(scans.map((s) => s.province).filter(Boolean))].join(', ') || 'Henüz yok'}
             </span>
           </div>
-
-          {playing && (
-            <p className="text-sm text-amber-600 bg-amber-50 rounded-lg p-2">
-              Yolculuk animasyonu haritada oynatılıyor (isteğe bağlı geliştirilebilir).
-            </p>
-          )}
 
           <div className="space-y-3">
             <h3 className="font-semibold text-slate-800">Yolculuk geçmişi</h3>
@@ -91,16 +81,6 @@ export default function PackageModal({ package: pkg, onClose }) {
                 ))}
               </ul>
             )}
-          </div>
-
-          <div className="flex gap-2 pt-2">
-            <button
-              type="button"
-              onClick={togglePlay}
-              className="flex-1 py-2.5 rounded-xl bg-amber-500 text-white font-medium text-sm"
-            >
-              {playing ? 'Durdur' : 'Yolculuğu haritada oynat'}
-            </button>
           </div>
         </div>
       </div>

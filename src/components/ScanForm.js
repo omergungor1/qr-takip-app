@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { createClient } from '@/lib/supabase'
 import turkiyeIlIlce from '../../data/turkiye-il-ilce'
 
@@ -14,11 +14,11 @@ export default function ScanForm({ package: pkg, scans }) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
-  const [geoAttempted, setGeoAttempted] = useState(false)
-
   const provinces = turkiyeIlIlce.provinces || []
   const districts = (turkiyeIlIlce.districts || []).filter((d) => String(d.province_id) === String(provinceId))
 
+  /* Kullanıcı konum verisi şimdilik kullanılmıyor; il/ilçe manuel seçiliyor. İlçe lat/lng ile kayıt yapılıyor.
+  const [geoAttempted, setGeoAttempted] = useState(false)
   useEffect(() => {
     if (geoAttempted) return
     setGeoAttempted(true)
@@ -36,6 +36,7 @@ export default function ScanForm({ package: pkg, scans }) {
       () => {}
     )
   }, [geoAttempted, provinces])
+  */
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -46,8 +47,13 @@ export default function ScanForm({ package: pkg, scans }) {
       setError('Lütfen il seçin.')
       return
     }
-    const latitude = province.lat
-    const longitude = province.lng
+    if (!district) {
+      setError('Lütfen ilçe seçin. Konum ilçe bazında kaydedilir.')
+      return
+    }
+    // package_scans koordinatları: ilçe seviyesinde (turkiye-il-ilce.js districts lat/lng)
+    const latitude = district.lat != null ? Number(district.lat) : Number(province.lat)
+    const longitude = district.lng != null ? Number(district.lng) : Number(province.lng)
 
     setLoading(true)
     const supabase = createClient()
@@ -152,6 +158,7 @@ export default function ScanForm({ package: pkg, scans }) {
               value={districtId}
               onChange={(e) => setDistrictId(e.target.value)}
               className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 bg-white"
+              required
             >
               <option value="">Seçin</option>
               {districts.map((d) => (

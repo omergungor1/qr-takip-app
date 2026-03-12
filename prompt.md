@@ -362,3 +362,19 @@ Kullanıcılar kendileri blog yazabilir
 bu proje sayesinde yol arkadaşlarıma yeni bir mecra ve gelir kaynağı sağlamak
 
 Ayda bir, 15 günde bir toplantı, kalan vaktimde gezi yazısı vs.
+
+istediğim şey şu:
+tr haritası vs güzel
+
+qr okutma ekranı hak:
+ilçe olarak görmemiz gerekiyor -> 
+
+
+Otomatik olarak kayan bir slider koyalım -> paket ist, paket şurada vs...
+
+3 tane kendi gazetemiz var -> backlink vericez
+timb bursa yalova bölge başk.
+meslektaşlarım haber desteği verecek
+ads, 
+
+2 kod yeterli

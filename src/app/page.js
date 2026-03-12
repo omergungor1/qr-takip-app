@@ -64,7 +64,7 @@ export default async function Home() {
         <section className="py-6 sm:py-8 bg-slate-50">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 text-center">
-              Türkiye Haritası ve Paket Konumları
+              Gezgin Paketlerin Konumları
             </h2>
             <p className="text-slate-600 text-center mb-6 max-w-2xl mx-auto">
               Haritada paketlerin anlık konumlarını görün. Bir pakete tıklayarak yolculuk geçmişini inceleyebilirsiniz.
@@ -79,14 +79,13 @@ export default async function Home() {
           </div>
         </section>
 
-        <IntroSection />
-        <StatsSection />
-
         <GallerySection scans={scans} />
+        <StatsSection />
+        <IntroSection />
 
         <section className="py-12 sm:py-16 bg-slate-50">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-8">Blog</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-8">Gezgin blogları</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {blogs.map((blog) => (
                 <BlogCard key={blog.id} blog={blog} />
