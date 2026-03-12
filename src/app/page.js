@@ -1,65 +1,123 @@
-import Image from "next/image";
+import { createClient } from '@/lib/supabase-server'
+import MapSection from '@/components/MapSection'
+import PackageModal from '@/components/PackageModal'
+import IntroSection from '@/components/IntroSection'
+import StatsSection from '@/components/StatsSection'
+import GallerySection from '@/components/GallerySection'
+import BlogCard from '@/components/BlogCard'
+import NewsCard from '@/components/NewsCard'
+import Footer from '@/components/Footer'
+import HomeClient from '@/components/HomeClient'
+import SiteHeader from '@/components/SiteHeader'
+import { getStorageUrl } from '@/lib/utils'
 
-export default function Home() {
+export const metadata = {
+  title: 'Gezgin Paket | QR ile Turizm Takip',
+  description: 'QR kod ile takip edilen gezgin paketlerin Türkiye yolculuğunu haritada takip edin.',
+}
+
+async function getData() {
+  const supabase = await createClient()
+
+  const [packagesRes, newsRes, blogsRes, scansRes] = await Promise.all([
+    supabase.from('packages').select('*, package_scans(*)').eq('is_active', true).order('created_at', { ascending: false }),
+    supabase.from('news').select('*').eq('is_active', true).not('published_at', 'is', null).order('published_at', { ascending: false }).limit(6),
+    supabase.from('blogs').select('*').eq('is_active', true).not('published_at', 'is', null).order('published_at', { ascending: false }).limit(6),
+    supabase.from('package_scans').select('*').order('created_at', { ascending: false }).limit(50),
+  ])
+
+  const packages = packagesRes.data || []
+  const news = (newsRes.data || []).map((n) => ({ ...n, cover_image: n.cover_image ? getStorageUrl(n.cover_image) : getStorageUrl(`news/${n.id}.jpg`) }))
+  const blogs = (blogsRes.data || []).map((b) => ({ ...b, cover_image: b.cover_image ? getStorageUrl(b.cover_image) : getStorageUrl(`blogs/${b.id}.jpg`) }))
+  const scans = (scansRes.data || []).map((s) => ({ ...s, image_path: s.image_path ? getStorageUrl(s.image_path) : null }))
+
+  const cities = new Set(scans.map((s) => s.province).filter(Boolean))
+  const totalKm = 0 // demo: statik veya hesaplanabilir
+  const stats = {
+    totalPackages: packages.length,
+    citiesVisited: cities.size,
+    totalKm,
+    totalScans: scans.length,
+  }
+
+  const packagesWithScans = packages.map((p) => ({
+    ...p,
+    package_scans: (p.package_scans || []).map((s) => ({
+      ...s,
+      image_path: s.image_path ? getStorageUrl(s.image_path) : null,
+    })),
+  }))
+
+  return {
+    packages: packagesWithScans,
+    news,
+    blogs,
+    scans,
+    stats,
+  }
+}
+
+export default async function Home() {
+  const { packages, news, blogs, scans, stats } = await getData()
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+    <div className="min-h-screen flex flex-col">
+      <SiteHeader />
+
+      <main className="flex-1">
+        <section className="py-6 sm:py-8 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 text-center">
+              Türkiye Haritası ve Paket Konumları
+            </h2>
+            <p className="text-slate-600 text-center mb-6 max-w-2xl mx-auto">
+              Haritada paketlerin anlık konumlarını görün. Bir pakete tıklayarak yolculuk geçmişini inceleyebilirsiniz.
+            </p>
+            <HomeClient
+              packages={packages}
+              news={news}
+              blogs={blogs}
+              scans={scans}
+              stats={stats}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          </div>
+        </section>
+
+        <IntroSection />
+        <StatsSection />
+
+        <GallerySection scans={scans} />
+
+        <section className="py-12 sm:py-16 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-8">Blog</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {blogs.map((blog) => (
+                <BlogCard key={blog.id} blog={blog} />
+              ))}
+            </div>
+            {blogs.length === 0 && (
+              <p className="text-slate-500 text-center py-8">Henüz blog yazısı yok.</p>
+            )}
+          </div>
+        </section>
+
+        <section className="py-12 sm:py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-8">Haberler</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {news.map((n) => (
+                <NewsCard key={n.id} news={n} />
+              ))}
+            </div>
+            {news.length === 0 && (
+              <p className="text-slate-500 text-center py-8">Henüz haber yok.</p>
+            )}
+          </div>
+        </section>
       </main>
+
+      <Footer />
     </div>
-  );
+  )
 }

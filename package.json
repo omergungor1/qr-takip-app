@@ -2,6 +2,7 @@
   "name": "qr-takip-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,9 +10,14 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.47.10",
+    "mapbox-gl": "^3.8.0",
     "next": "16.1.6",
+    "qrcode": "^1.5.4",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "react-map-gl": "^7.1.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
