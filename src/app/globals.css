@@ -24,3 +24,26 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Blog ve haber detay içeriği okunaklı olsun */
+.blog-content p,
+.blog-content li,
+.blog-content span,
+.news-content p,
+.news-content li,
+.news-content span {
+  color: #1e293b;
+}
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.news-content h1,
+.news-content h2,
+.news-content h3 {
+  color: #0f172a;
+}
+.blog-content a,
+.news-content a {
+  color: #d97706;
+  text-decoration: underline;
+}

@@ -6,13 +6,11 @@ import StatsSection from '@/components/StatsSection'
 import GallerySection from '@/components/GallerySection'
 import BlogCard from '@/components/BlogCard'
 import NewsCard from '@/components/NewsCard'
-import Footer from '@/components/Footer'
 import HomeClient from '@/components/HomeClient'
-import SiteHeader from '@/components/SiteHeader'
 import { getStorageUrl } from '@/lib/utils'
 
 export const metadata = {
-  title: 'Gezgin Paket | QR ile Turizm Takip',
+  title: 'Gezgin Paket',
   description: 'QR kod ile takip edilen gezgin paketlerin Türkiye yolculuğunu haritada takip edin.',
 }
 
@@ -61,10 +59,8 @@ export default async function Home() {
   const { packages, news, blogs, scans, stats } = await getData()
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <SiteHeader />
-
-      <main className="flex-1">
+    <>
+      <section className="flex-1">
         <section className="py-6 sm:py-8 bg-slate-50">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 mb-4 text-center">
@@ -115,9 +111,7 @@ export default async function Home() {
             )}
           </div>
         </section>
-      </main>
-
-      <Footer />
-    </div>
+      </section>
+    </>
   )
 }

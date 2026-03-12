@@ -340,5 +340,25 @@ blogs/{blog_id}.jpg
 
 
 
+turizm amaçlı bir paketin tr ve dünyayı dolaşması
+Dünya paketenti ile ilgili başvurulacak
 
 
+
+ilk etapta 300 paket olacak
+Ağırlıklı 6-7 büyük şehirde ulaşım noktalarına dağılmış olacak.
+ikonumuz var onu yollayacağım. -> paketleri burda göreceğiz , bu paketin hareketini çizgi şeklinde göreceğiz
+Trabzondan - ist hareketini göreceğiz
+
+ilk aşamada şöyle yapmak istiyoruz -> tıklayarak değil de yolculuğu insanlar görsün istiyoruz. 
+
+
+Gezgin paylaşımları isimlendir (Kullanıcı paylaşımları)
+
+Blog deyince -> Gezgin blogları olabilir.
+Kullanıcılar kendileri blog yazabilir
+
+Şunu da belirteyim -> kolayca anlaşılabilmek
+bu proje sayesinde yol arkadaşlarıma yeni bir mecra ve gelir kaynağı sağlamak
+
+Ayda bir, 15 günde bir toplantı, kalan vaktimde gezi yazısı vs.

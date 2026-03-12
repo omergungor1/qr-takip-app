@@ -32,16 +32,10 @@ export default async function ScanPage({ params }) {
   )
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200 py-4">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-lg font-bold text-slate-800">Gezgin Paket</h1>
-        </div>
-      </header>
-
-      <main className="container mx-auto px-4 py-8 max-w-lg">
+    <div className="bg-slate-50 min-h-screen">
+      <div className="container mx-auto px-4 py-8 max-w-lg">
         <ScanForm package={pkg} scans={scans} />
-      </main>
+      </div>
     </div>
   )
 }

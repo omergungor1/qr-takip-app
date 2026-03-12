@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
-export default function PackageModal({ package: pkg, onClose, baseUrl }) {
+export default function PackageModal({ package: pkg, onClose }) {
   const [playing, setPlaying] = useState(false)
   const scans = (pkg?.package_scans || []).sort(
     (a, b) => new Date(a.created_at) - new Date(b.created_at)
@@ -67,7 +67,7 @@ export default function PackageModal({ package: pkg, onClose, baseUrl }) {
                         {scan.district ? ` / ${scan.district}` : ''}
                       </p>
                       <p className="text-xs text-slate-500">
-                        {new Date(scan.created_at).toLocaleDateString('tr-TR', {
+                        {new Date(scan.created_at).toLocaleString('tr-TR', {
                           dateStyle: 'medium',
                           timeStyle: 'short',
                         })}
@@ -101,16 +101,6 @@ export default function PackageModal({ package: pkg, onClose, baseUrl }) {
             >
               {playing ? 'Durdur' : 'Yolculuğu haritada oynat'}
             </button>
-            {baseUrl && (
-              <a
-                href={`${baseUrl}/p/${pkg.qr_slug}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 py-2.5 rounded-xl border border-amber-500 text-amber-600 font-medium text-sm text-center"
-              >
-                QR sayfası
-              </a>
-            )}
           </div>
         </div>
       </div>

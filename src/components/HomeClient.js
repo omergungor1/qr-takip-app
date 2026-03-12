@@ -17,7 +17,6 @@ export default function HomeClient({ packages, news, blogs, scans, stats }) {
         <PackageModal
           package={selectedPackage}
           onClose={() => setSelectedPackage(null)}
-          baseUrl={typeof window !== 'undefined' ? window.location.origin : ''}
         />
       )}
     </>
