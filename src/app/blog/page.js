@@ -3,8 +3,8 @@ import { getStorageUrl } from '@/lib/utils'
 import BlogCard from '@/components/BlogCard'
 
 export const metadata = {
-  title: 'Blog | Gezgin Paket',
-  description: 'Gezgin Paket projesi blog yazıları.',
+  title: 'Blog | GezginKitap',
+  description: 'GezginKitap projesi blog yazıları.',
 }
 
 export default async function BlogListPage() {

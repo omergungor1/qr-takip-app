@@ -8,9 +8,19 @@ create table packages (
     description text,
     qr_slug text unique not null,
     is_active boolean default true,
+    sponsor_name text,
+    sponsor_logo text,
+    sponsor_url text,
     created_at timestamptz default now()
 );
 create index idx_packages_slug on packages(qr_slug);
+
+create table subscribers (
+    id uuid primary key default uuid_generate_v4(),
+    email text unique not null,
+    created_at timestamptz default now()
+);
+create index idx_subscribers_email on subscribers(email);
 
 create table package_scans (
     id uuid primary key default uuid_generate_v4(),
@@ -90,3 +100,18 @@ insert into packages (code, qr_slug, title)
 values
 ('0001','0001','Demo Paket 1'),
 ('0002','0002','Demo Paket 2');
+
+-- Subscribers tablosu için RLS (anon ile API'den insert için):
+-- alter table subscribers enable row level security;
+-- create policy "Allow anon insert subscribers" on subscribers for insert to anon with (true);
+
+-- Mevcut veritabanına sponsor + subscribers eklemek için (Supabase SQL Editor'da çalıştırın):
+-- alter table packages add column if not exists sponsor_name text;
+-- alter table packages add column if not exists sponsor_logo text;
+-- alter table packages add column if not exists sponsor_url text;
+-- create table if not exists subscribers (id uuid primary key default uuid_generate_v4(), email text unique not null, created_at timestamptz default now());
+-- create index if not exists idx_subscribers_email on subscribers(email);
+
+-- Örnek sponsorlu kitap (logo public/sponsors altındaki dosya adıyla):
+-- update packages set sponsor_name = 'Özdilek', sponsor_logo = 'sponsors/ozdilek-logo.webp', sponsor_url = 'https://www.ozdilek.com.tr' where code = '0001';
+-- update packages set sponsor_name = 'Opet', sponsor_logo = 'sponsors/Opet-Logo.png', sponsor_url = 'https://www.opet.com.tr' where code = '0002';

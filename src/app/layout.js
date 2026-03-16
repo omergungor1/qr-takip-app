@@ -1,9 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins, Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteLayoutWrapper from "@/components/SiteLayoutWrapper";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const poppins = Poppins({
+  variable: "--font-poppins",
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -13,15 +19,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Gezgin Paket",
-  description: "QR kod ile takip edilen gezgin paketlerin Türkiye yolculuğunu haritada takip edin.",
+  title: "GezginKitap",
+  description: "Kitaplar Türkiye'yi geziyor. Bir kitabı bul, check-in yap ve başka bir şehre bırak. Türkiye'nin en ilginç kitap yolculuğunu birlikte yazıyoruz.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="tr">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.variable} ${inter.variable} ${geistMono.variable} antialiased`}
       >
         <SiteLayoutWrapper>{children}</SiteLayoutWrapper>
       </body>

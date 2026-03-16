@@ -3,10 +3,12 @@
 import { usePathname } from 'next/navigation'
 import SiteHeader from './SiteHeader'
 import Footer from './Footer'
+import EmailSubscription from './EmailSubscription'
 
 export default function SiteLayoutWrapper({ children }) {
   const pathname = usePathname()
   const isAdmin = pathname?.startsWith('/admin')
+  const isCheckInPage = pathname?.startsWith('/p/') || pathname?.startsWith('/qr/')
 
   if (isAdmin) {
     return <>{children}</>
@@ -16,6 +18,7 @@ export default function SiteLayoutWrapper({ children }) {
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
       <main className="flex-1">{children}</main>
+      {!isCheckInPage && <EmailSubscription />}
       <Footer />
     </div>
   )

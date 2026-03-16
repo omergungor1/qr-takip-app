@@ -40,16 +40,16 @@ export default function AdminNav({ user }) {
             <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
               <Image
                 src="/logo.png"
-                alt="Gezgin Paket"
+                alt="GezginKitap"
                 fill
                 className="object-contain"
                 sizes="40px"
               />
             </div>
             <span className="font-bold text-slate-800 text-base sm:text-xl truncate">
-              Gezgin Paket
+              GezginKitap
             </span>
-            <span className="font-bold text-amber-600 text-sm sm:text-base ml-1">Admin</span>
+            <span className="font-bold text-[var(--primary)] text-sm sm:text-base ml-1">Admin</span>
           </Link>
 
           {/* Masaüstü: yatay menü */}
@@ -60,8 +60,8 @@ export default function AdminNav({ user }) {
                 href={href}
                 className={`px-3 py-2 rounded-lg text-sm transition-colors ${
                   isActive(href)
-                    ? 'bg-amber-100 text-amber-800 font-medium'
-                    : 'text-slate-600 hover:text-amber-600 hover:bg-amber-50'
+                    ? 'bg-[var(--primary)]/10 text-[var(--primary)] font-medium'
+                    : 'text-slate-600 hover:text-[var(--primary)] hover:bg-[var(--primary)]/5'
                 }`}
               >
                 {label}
@@ -110,8 +110,8 @@ export default function AdminNav({ user }) {
                   onClick={() => setMenuOpen(false)}
                   className={`px-3 py-2.5 rounded-lg font-medium ${
                     isActive(href)
-                      ? 'bg-amber-100 text-amber-800'
-                      : 'text-slate-700 hover:bg-amber-50 hover:text-amber-700'
+                      ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
+                      : 'text-slate-700 hover:bg-[var(--primary)]/5 hover:text-[var(--primary)]'
                   }`}
                 >
                   {label}

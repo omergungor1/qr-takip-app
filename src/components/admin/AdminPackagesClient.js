@@ -39,7 +39,7 @@ export default function AdminPackagesClient({ packages: initialPackages, qrBaseU
       for (const pkg of toGen) {
         if (cancelled) break
         try {
-          const url = `${baseUrl}/p/${pkg.qr_slug}`
+          const url = `${baseUrl}/qr/${pkg.qr_slug}`
           const dataUrl = await toDataURL(url, { width: QR_SIZE, margin: 1 })
           next[pkg.qr_slug] = dataUrl
           generatedRef.current[pkg.qr_slug] = true
@@ -167,8 +167,14 @@ export default function AdminPackagesClient({ packages: initialPackages, qrBaseU
                 <p className="text-sm text-slate-500 mt-0.5">Slug: {pkg.qr_slug}</p>
               </div>
 
-              {/* Hareketler butonu + Aktif/Pasif */}
-              <div className="flex items-center gap-3 flex-shrink-0">
+              {/* Düzenle + Hareketler + Aktif/Pasif */}
+              <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
+                <Link
+                  href={`/admin/packages/${pkg.id}/edit`}
+                  className="inline-flex items-center gap-2 rounded-xl bg-slate-100 text-slate-700 px-4 py-2.5 text-sm font-medium hover:bg-[var(--primary)]/10 hover:text-[var(--primary)] border border-slate-200"
+                >
+                  Düzenle
+                </Link>
                 <Link
                   href={`/admin/packages/${pkg.id}`}
                   className="inline-flex items-center gap-2 rounded-xl bg-slate-100 text-slate-700 px-4 py-2.5 text-sm font-medium hover:bg-amber-50 hover:text-amber-700 border border-slate-200 hover:border-amber-200 transition-colors"

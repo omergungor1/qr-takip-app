@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { createClient } from '@/lib/supabase'
 import turkiyeIlIlce from '../../data/turkiye-il-ilce'
+import EmailSubscription from '@/components/EmailSubscription'
 
 const STORAGE_PATH = 'scan-images'
 
@@ -86,31 +87,36 @@ export default function ScanForm({ package: pkg, scans }) {
 
   if (success) {
     return (
-      <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 text-center">
-        <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
+      <>
+        <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 text-center">
+          <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-bold text-slate-800 mb-2">Teşekkürler!</h2>
+          <p className="text-slate-600 mb-6">
+            Bu kitabın yolculuğuna katkıda bulunduğunuz için teşekkür ederiz. Lütfen kitabı farklı bir noktaya bırakarak yolculuğuna devam etmesini sağlayın.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href={pkg?.code ? `/book/${pkg.code}` : '/harita'}
+              className="inline-flex items-center justify-center rounded-xl bg-[var(--primary)] text-white font-medium py-3 px-6 shadow-sm hover:opacity-90"
+            >
+              Kitabın Yolculuğunu Gör
+            </a>
+            <a
+              href="/"
+              className="inline-flex items-center justify-center rounded-xl border-2 border-[var(--primary)] text-[var(--primary)] font-medium py-3 px-6"
+            >
+              Ana Sayfaya Dön
+            </a>
+          </div>
         </div>
-        <h2 className="text-xl font-bold text-slate-800 mb-2">Paylaşımınız kaydedildi</h2>
-        <p className="text-slate-600 mb-6">
-          Bu paketin yolculuğuna katkıda bulunduğunuz için teşekkür ederiz.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <a
-            href="/"
-            className="inline-flex items-center justify-center rounded-xl bg-amber-500 text-white font-medium py-3 px-6"
-          >
-            Ana Sayfaya Git
-          </a>
-          <a
-            href="/#map"
-            className="inline-flex items-center justify-center rounded-xl border-2 border-amber-500 text-amber-600 font-medium py-3 px-6"
-          >
-            Haritada Paketi Gör
-          </a>
+        <div className="mt-8">
+          <EmailSubscription />
         </div>
-      </div>
+      </>
     )
   }
 
@@ -120,13 +126,13 @@ export default function ScanForm({ package: pkg, scans }) {
         <div className="text-center mb-6">
           <h2 className="text-xl font-bold text-slate-800">{pkg.title || pkg.code}</h2>
           <p className="text-slate-600 text-sm mt-2">
-            Bu bir gezgin paket projesidir. Paketi bulduğunuz şehirde kısa bir mesaj bırakabilir, isterseniz bir fotoğraf da paylaşabilirsiniz.
+            Bu bir gezgin kitap projesidir. Kitabı bulduğunuz şehirde kısa bir mesaj bırakabilir, isterseniz bir fotoğraf da paylaşabilirsiniz.
           </p>
         </div>
 
         {scans.length > 0 && (
           <div className="mb-6 p-4 bg-slate-50 rounded-xl">
-            <h3 className="font-semibold text-slate-800 mb-2">Paketin geçmiş yolculuğu</h3>
+            <h3 className="font-semibold text-slate-800 mb-2">Kitabın geçmiş yolculuğu</h3>
             <ul className="space-y-2 max-h-32 overflow-y-auto">
               {scans.slice(-5).reverse().map((s) => (
                 <li key={s.id} className="text-sm text-slate-600">
@@ -182,14 +188,17 @@ export default function ScanForm({ package: pkg, scans }) {
               type="file"
               accept="image/*"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
-              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 bg-white file:mr-2 file:rounded-lg file:border-0 file:bg-amber-50 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-amber-700"
+              className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 bg-white file:mr-2 file:rounded-lg file:border-0 file:bg-[var(--primary)]/10 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-[var(--primary)]"
             />
           </div>
+          <p className="text-xs text-[var(--text-light)] bg-slate-50 rounded-xl p-3 border border-slate-100">
+            Yüklediğiniz fotoğraf ve notlar kitabın dijital yolculuğu içerisinde herkese açık olarak yayınlanabilir. (KVKK)
+          </p>
           {error && <p className="text-red-600 text-sm">{error}</p>}
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-amber-500 text-white font-medium py-3 disabled:opacity-50"
+            className="w-full rounded-xl bg-[var(--primary)] text-white font-medium py-3 disabled:opacity-50 shadow-sm hover:opacity-90"
           >
             {loading ? 'Gönderiliyor...' : 'Gönder'}
           </button>

@@ -9,7 +9,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params
   const supabase = await createClient()
   const { data } = await supabase.from('news').select('title').eq('slug', slug).eq('is_active', true).single()
-  return { title: data?.title ? `${data.title} | Gezgin Paket` : 'Haber | Gezgin Paket' }
+  return { title: data?.title ? `${data.title} | GezginKitap` : 'Haber | GezginKitap' }
 }
 
 export default async function NewsSlugPage({ params }) {
@@ -60,7 +60,7 @@ export default async function NewsSlugPage({ params }) {
                 GP
               </div>
               <div>
-                <p className="font-semibold text-slate-800">Gezgin Paket Editör</p>
+                <p className="font-semibold text-slate-800">GezginKitap Editör</p>
                 <p className="text-sm text-slate-500">İçerik ekibi</p>
               </div>
             </div>

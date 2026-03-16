@@ -6,11 +6,13 @@ import Image from 'next/image'
 
 const navLinks = [
   { href: '/', label: 'Ana Sayfa' },
+  { href: '/harita', label: 'Harita' },
   { href: '/blog', label: 'Blog' },
   { href: '/haber', label: 'Haberler' },
+  { href: '/hakkimizda', label: 'Proje Hakkında' },
 ]
 
-const linkClass = 'block px-4 py-3 text-sm font-medium text-slate-600 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors'
+const linkClass = 'block px-4 py-3 text-sm font-medium text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[#FF6B3D]/10 rounded-xl transition-colors'
 
 export default function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -23,25 +25,31 @@ export default function SiteHeader() {
             <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0">
               <Image
                 src="/logo.png"
-                alt="Gezgin Paket"
+                alt="GezginKitap"
                 fill
                 className="object-contain"
                 priority
                 sizes="40px"
               />
             </div>
-            <span className="font-bold text-slate-800 text-lg sm:text-xl truncate">
-              Gezgin Paket
+            <span className="font-bold text-[var(--foreground)] text-lg sm:text-xl truncate" style={{ fontFamily: 'var(--font-poppins)' }}>
+              GezginKitap
             </span>
           </Link>
 
           {/* Masaüstü: yatay menü */}
           <nav className="hidden md:flex items-center gap-1 sm:gap-4">
             {navLinks.map(({ href, label }) => (
-              <Link key={href} href={href} className="px-2 py-2 text-sm font-medium text-slate-600 hover:text-amber-600 rounded-lg hover:bg-amber-50">
+              <Link key={href} href={href} className="px-2 py-2 text-sm font-medium text-[var(--foreground)] hover:text-[var(--primary)] rounded-xl hover:bg-[#FF6B3D]/10 transition-colors">
                 {label}
               </Link>
             ))}
+            <Link
+              href="/harita"
+              className="ml-2 rounded-xl bg-[var(--primary)] text-white text-sm font-semibold px-4 py-2.5 shadow-sm hover:opacity-90 transition-opacity"
+            >
+              Kitap Bul
+            </Link>
           </nav>
 
           {/* Mobil: hamburger butonu */}
@@ -73,7 +81,7 @@ export default function SiteHeader() {
       {/* Mobil: açılır menü */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-200 ease-out ${
-          menuOpen ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
+          menuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <nav className="container mx-auto px-4 pb-4 pt-1 bg-white border-t border-slate-100">
@@ -88,6 +96,13 @@ export default function SiteHeader() {
                 {label}
               </Link>
             ))}
+            <Link
+              href="/harita"
+              className="block px-4 py-3 text-sm font-semibold rounded-xl bg-[var(--primary)] text-white text-center mt-2"
+              onClick={() => setMenuOpen(false)}
+            >
+              Kitap Bul
+            </Link>
           </div>
         </nav>
       </div>

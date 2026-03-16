@@ -3,8 +3,8 @@ import { getStorageUrl } from '@/lib/utils'
 import NewsCard from '@/components/NewsCard'
 
 export const metadata = {
-  title: 'Haberler | Gezgin Paket',
-  description: 'Gezgin Paket projesi haberleri.',
+  title: 'Haberler | GezginKitap',
+  description: 'GezginKitap projesi haberleri.',
 }
 
 export default async function HaberListPage() {
