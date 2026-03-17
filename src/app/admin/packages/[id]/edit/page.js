@@ -15,7 +15,7 @@ export default async function PackageEditPage({ params }) {
   return (
     <div>
       <div className="flex items-center gap-4 mb-6">
-        <Link href="/admin/packages" className="text-slate-600 hover:text-[var(--primary)]">← Paketler</Link>
+        <Link href="/admin/packages" className="text-slate-600 hover:text-[var(--primary)]">← Kitaplar</Link>
         <Link href={`/admin/packages/${id}`} className="text-slate-600 hover:text-[var(--primary)]">Hareketler</Link>
         <h1 className="text-2xl font-bold text-slate-800">Düzenle: {pkg.title || pkg.code}</h1>
       </div>

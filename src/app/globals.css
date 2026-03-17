@@ -78,3 +78,16 @@ body {
 .animate-ticker:hover {
   animation-play-state: paused;
 }
+
+/* Dikey kayan mesaj paneli – sonsuz döngü */
+@keyframes ticker-scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+.animate-ticker-vertical {
+  animation: ticker-scroll-vertical 45s linear infinite;
+}

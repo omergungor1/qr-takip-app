@@ -23,7 +23,7 @@ export default async function AdminDashboard() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Link href="/admin/packages" className="bg-white rounded-xl p-6 shadow border border-slate-200 hover:border-amber-300">
           <p className="text-3xl font-bold text-amber-600">{packagesCount ?? 0}</p>
-          <p className="text-slate-600">Paket</p>
+          <p className="text-slate-600">Kitap</p>
         </Link>
         <Link href="/admin/news" className="bg-white rounded-xl p-6 shadow border border-slate-200 hover:border-amber-300">
           <p className="text-3xl font-bold text-amber-600">{newsCount ?? 0}</p>

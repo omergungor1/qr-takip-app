@@ -1,11 +1,14 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import turkiyeIlIlce from '../../data/turkiye-il-ilce'
 import EmailSubscription from '@/components/EmailSubscription'
 
 const STORAGE_PATH = 'scan-images'
+
+const SHARING_CONSENT_TEXT = "Paylaştığınız fotoğraf, isim ve mesajlar KVKK yönetmeliği çerçevesinde web sitemizde ve gezgin kitapla ilgili tüm mecralarda yayınlanabilir."
 
 export default function ScanForm({ package: pkg, scans }) {
   const [provinceId, setProvinceId] = useState('')
@@ -15,6 +18,8 @@ export default function ScanForm({ package: pkg, scans }) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
+  const [agreeKvkk, setAgreeKvkk] = useState(false)
+  const [agreeSharing, setAgreeSharing] = useState(false)
   const provinces = turkiyeIlIlce.provinces || []
   const districts = (turkiyeIlIlce.districts || []).filter((d) => String(d.province_id) === String(provinceId))
 
@@ -191,14 +196,40 @@ export default function ScanForm({ package: pkg, scans }) {
               className="w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 bg-white file:mr-2 file:rounded-lg file:border-0 file:bg-[var(--primary)]/10 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-[var(--primary)]"
             />
           </div>
-          <p className="text-xs text-[var(--text-light)] bg-slate-50 rounded-xl p-3 border border-slate-100">
-            Yüklediğiniz fotoğraf ve notlar kitabın dijital yolculuğu içerisinde herkese açık olarak yayınlanabilir. (KVKK)
-          </p>
+
+          <div className="space-y-4 rounded-xl bg-slate-50 p-4 border border-slate-100">
+            <label className="flex items-start gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={agreeKvkk}
+                onChange={(e) => setAgreeKvkk(e.target.checked)}
+                className="mt-1 w-4 h-4 rounded border-slate-300 text-[var(--primary)] focus:ring-[var(--primary)]"
+              />
+              <span className="text-sm text-slate-700 group-hover:text-slate-900">
+                <Link href="/kvkk" target="_blank" className="text-[var(--primary)] underline hover:no-underline">KVKK Aydınlatma Metni</Link>
+                {' ve '}
+                <Link href="/gizlilik" target="_blank" className="text-[var(--primary)] underline hover:no-underline">Gizlilik Sözleşmesi</Link>
+                {'\'ni okudum, kabul ediyorum.'}
+              </span>
+            </label>
+            <label className="flex items-start gap-3 cursor-pointer group">
+              <input
+                type="checkbox"
+                checked={agreeSharing}
+                onChange={(e) => setAgreeSharing(e.target.checked)}
+                className="mt-1 w-4 h-4 rounded border-slate-300 text-[var(--primary)] focus:ring-[var(--primary)]"
+              />
+              <span className="text-sm text-slate-700 group-hover:text-slate-900">
+                {SHARING_CONSENT_TEXT} Bu metni onaylıyor, paylaşım iznimi veriyorum.
+              </span>
+            </label>
+          </div>
+
           {error && <p className="text-red-600 text-sm">{error}</p>}
           <button
             type="submit"
-            disabled={loading}
-            className="w-full rounded-xl bg-[var(--primary)] text-white font-medium py-3 disabled:opacity-50 shadow-sm hover:opacity-90"
+            disabled={loading || !agreeKvkk || !agreeSharing}
+            className="w-full rounded-xl bg-[var(--primary)] text-white font-medium py-3 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm hover:opacity-90"
           >
             {loading ? 'Gönderiliyor...' : 'Gönder'}
           </button>

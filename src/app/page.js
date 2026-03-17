@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase-server'
 import MapSection from '@/components/MapSection'
 import IntroSection from '@/components/IntroSection'
 import StatsSection from '@/components/StatsSection'
+import TurizmKategoriButtons from '@/components/TurizmKategoriButtons'
+import InfoCardsSection from '@/components/InfoCardsSection'
 import GallerySection from '@/components/GallerySection'
 import BlogCard from '@/components/BlogCard'
 import NewsCard from '@/components/NewsCard'
@@ -72,7 +74,6 @@ export default async function Home() {
     <>
       <HeroSection stats={stats} />
       <section className="flex-1">
-        <StatsSection stats={stats} />
         <section className="py-6 sm:py-8 bg-[var(--background)]" id="map">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-2 text-center">
@@ -88,24 +89,18 @@ export default async function Home() {
               scans={scans}
               stats={stats}
             />
-            <div className="text-center mt-6">
-              <a
-                href="/harita"
-                className="inline-flex items-center justify-center rounded-xl bg-[var(--primary)] text-white font-semibold px-6 py-3 shadow-sm hover:opacity-90"
-              >
-                Haritayı Keşfet
-              </a>
-            </div>
           </div>
         </section>
-
+        <TurizmKategoriButtons />
+        <StatsSection stats={stats} />
+        <InfoCardsSection />
         <GallerySection scans={scans} />
         <WantedBooksSection wantedBooks={wantedBooks} />
         <IntroSection />
 
         <section className="py-12 sm:py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Blog</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Gezgin Blogları</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {blogs.map((blog) => (
                 <BlogCard key={blog.id} blog={blog} />

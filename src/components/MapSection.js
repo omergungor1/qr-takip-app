@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useMemo, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import Map, { Marker, Popup, NavigationControl, FullscreenControl } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { totalKmFromScans } from '@/lib/utils'
@@ -9,6 +10,19 @@ import { totalKmFromScans } from '@/lib/utils'
 const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || ''
 const ALL_ROUTES_SOURCE_ID = 'all-routes-source'
 const ALL_ROUTES_LAYER_ID = 'all-routes-layer'
+
+/** Harita yanı kayan panel için mesajlar */
+const MOCK_MESSAGES = [
+  { date: '17 Mart 2025', message: 'Merhaba ben Muharrem Köse, Mersinden selamlar' },
+  { date: '16 Mart 2025', message: 'Merhaba ben Mesut Pekcan. İsviçreden selamlar' },
+  { date: '15 Mart 2025', message: 'Merhaba ben Murat Ertaş. Erzurumdan herkese merhaba' },
+  { date: '14 Mart 2025', message: 'Erkan Akçam Bursa\'dan merhaba' },
+  { date: '13 Mart 2025', message: 'Merhaba ben Elvan Şimşek. Çorumdan tüm gezgin kitap sevenlere merhaba diyorum' },
+  { date: '12 Mart 2025', message: 'Ben Merve Şanlı, kitabı yeni tiyatro önüne bırakıyorum' },
+  { date: '11 Mart 2025', message: 'Merhaba ben Ankara\'dan Nizamettin Bilici, herkese selamlar' },
+  { date: '10 Mart 2025', message: 'Merhaba ben İpek Yiğit, Eskişehirden selamlar' },
+  { date: '9 Mart 2025', message: 'Merhaba ben Müjge karaca, Ardahan\'dan herkese merhaba' },
+]
 
 /** Her kitap için farklı renk – minimal, ayırt edilebilir palet */
 const ROUTE_PALETTE = [
@@ -156,9 +170,33 @@ export default function MapSection({ packages }) {
     return { totalCheckins, cities, km, lastCity }
   }
 
+  const messageList = (
+    <>
+      {MOCK_MESSAGES.map((item, i) => (
+        <div
+          key={`a-${i}`}
+          className="flex flex-col gap-1 p-3 rounded-xl bg-white/90 backdrop-blur border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+        >
+          <span className="text-xs font-medium text-[var(--primary)]">{item.date}</span>
+          <p className="text-sm text-[var(--foreground)] leading-snug">{item.message}</p>
+        </div>
+      ))}
+      {MOCK_MESSAGES.map((item, i) => (
+        <div
+          key={`b-${i}`}
+          className="flex flex-col gap-1 p-3 rounded-xl bg-white/90 backdrop-blur border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+        >
+          <span className="text-xs font-medium text-[var(--primary)]">{item.date}</span>
+          <p className="text-sm text-[var(--foreground)] leading-snug">{item.message}</p>
+        </div>
+      ))}
+    </>
+  )
+
   return (
-    <div className="h-[400px] sm:h-[500px] w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200">
-      <Map
+    <div className="flex flex-col sm:flex-row gap-4 w-full">
+      <div className="flex-1 min-h-[400px] sm:min-h-[500px] h-[400px] sm:h-[500px] rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+        <Map
         ref={mapRef}
         {...viewState}
         onMove={(evt) => setViewState(evt.viewState)}
@@ -186,13 +224,11 @@ export default function MapSection({ packages }) {
               style={{ cursor: 'pointer' }}
             >
               <div
-                className="p-2 rounded-full shadow-md hover:opacity-90 transition-opacity flex items-center justify-center border-2 border-white"
-                style={{ backgroundColor: color }}
+                className="p-1 rounded-full shadow-md hover:opacity-90 transition-opacity flex items-center justify-center border-2 border-white bg-white"
+                style={{ borderColor: color }}
                 title={pkg.title || pkg.code}
               >
-                <svg className="w-5 h-5 text-white drop-shadow-sm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z" />
-                </svg>
+                <Image src="/logo.png" alt="" width={28} height={28} className="rounded-full object-contain" />
               </div>
             </Marker>
           )
@@ -264,6 +300,19 @@ export default function MapSection({ packages }) {
           )
         })()}
       </Map>
+      </div>
+      <aside className="w-full sm:w-72 h-[320px] sm:h-[500px] shrink-0 flex flex-col rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-[var(--background)]">
+        <div className="px-4 py-3 border-b border-slate-200 bg-white/80 shrink-0">
+          <h3 className="text-sm font-semibold text-[var(--foreground)]">Okur mesajları</h3>
+        </div>
+        <div className="flex-1 min-h-0 overflow-hidden relative">
+          <div className="absolute top-0 left-0 right-0 w-full animate-ticker-vertical">
+            <div className="flex flex-col gap-3 p-4">
+              {messageList}
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
   )
 }

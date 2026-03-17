@@ -96,7 +96,7 @@ export default function AdminPackagesClient({ packages: initialPackages, qrBaseU
           onClick={() => setShowForm((v) => !v)}
           className="rounded-xl bg-amber-500 text-white px-4 py-2 font-medium"
         >
-          {showForm ? 'İptal' : 'Yeni paket'}
+          {showForm ? 'İptal' : 'Yeni kitap'}
         </button>
       </div>
 
@@ -108,7 +108,7 @@ export default function AdminPackagesClient({ packages: initialPackages, qrBaseU
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">QR Slug (URL’de kullanılacak)</label>
-            <input value={qrSlug} onChange={(e) => setQrSlug(e.target.value)} placeholder="ornek-paket" className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white placeholder:text-slate-400" required />
+            <input value={qrSlug} onChange={(e) => setQrSlug(e.target.value)} placeholder="ornek-kitap" className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white placeholder:text-slate-400" required />
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Başlık</label>

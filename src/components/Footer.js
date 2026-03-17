@@ -20,7 +20,24 @@ export default function Footer() {
               <li><Link href="/blog" className="hover:text-[var(--secondary)]">Blog</Link></li>
               <li><Link href="/haber" className="hover:text-[var(--secondary)]">Haberler</Link></li>
               <li><Link href="/hakkimizda" className="hover:text-[var(--secondary)]">Proje Hakkında</Link></li>
+              <li><Link href="/kvkk" className="hover:text-[var(--secondary)]">KVKK Aydınlatma Metni</Link></li>
+              <li><Link href="/gizlilik" className="hover:text-[var(--secondary)]">Gizlilik Sözleşmesi</Link></li>
               <li><Link href="/admin" className="hover:text-[var(--secondary)]">Admin</Link></li>
+              <li className="pt-2 mt-2 border-t border-slate-600">
+                <span className="text-slate-500 text-xs uppercase tracking-wide">İlgili siteler</span>
+              </li>
+              <li>
+                <a href="https://www.turizmatlasitv.com/" target="_blank" rel="noopener noreferrer" className="block py-1.5 hover:text-[var(--secondary)] transition-colors">
+                  <span className="font-medium text-slate-300">Turizm Atlası</span>
+                  <span className="block text-xs text-slate-500 mt-0.5">Türkiye'nin kültür ve turizm haberleri burada</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://www.gastronomiatlasi.com/" target="_blank" rel="noopener noreferrer" className="block py-1.5 hover:text-[var(--secondary)] transition-colors">
+                  <span className="font-medium text-slate-300">Gastronomi Atlası</span>
+                  <span className="block text-xs text-slate-500 mt-0.5">Türkiye'nin mekan ve otelleri</span>
+                </a>
+              </li>
             </ul>
           </div>
           <div>

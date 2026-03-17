@@ -18,7 +18,7 @@ export default async function AdminPackagesPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-800 mb-6">Paket Yönetimi</h1>
+      <h1 className="text-2xl font-bold text-slate-800 mb-6">Kitap Yönetimi</h1>
       <AdminPackagesClient packages={packages || []} qrBaseUrl={qrBaseUrl} />
     </div>
   )

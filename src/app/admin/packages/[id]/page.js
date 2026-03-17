@@ -22,7 +22,7 @@ export default async function PackageScansPage({ params }) {
   return (
     <div>
       <div className="flex items-center gap-4 mb-6">
-        <Link href="/admin/packages" className="text-slate-600 hover:text-amber-600">← Paketler</Link>
+        <Link href="/admin/packages" className="text-slate-600 hover:text-amber-600">← Kitaplar</Link>
         <h1 className="text-2xl font-bold text-slate-800">Hareketler: {pkg.title || pkg.code}</h1>
       </div>
       <div className="bg-white rounded-xl shadow border border-slate-200 overflow-hidden">

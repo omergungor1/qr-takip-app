@@ -18,7 +18,7 @@ export default function PackageModal({ package: pkg, onClose }) {
         <div className="p-4 sm:p-6 border-b border-slate-200 flex justify-between items-start">
           <div>
             <h2 className="text-xl font-bold text-slate-800">{pkg.title || pkg.code}</h2>
-            <p className="text-slate-600 text-sm mt-1">{pkg.description || 'Gezgin paket yolculuk geçmişi'}</p>
+            <p className="text-slate-600 text-sm mt-1">{pkg.description || 'Gezgin kitap yolculuk geçmişi'}</p>
           </div>
           <button
             type="button"
