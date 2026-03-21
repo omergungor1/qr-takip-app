@@ -1,0 +1,92 @@
+{
+    "blogs": [
+        {
+            "id": 1,
+            "title": "Kimse Bilmiyor! Bursa’da Görenleri Ege’de Hissettiren 5 Gizli Yer",
+            "description": "Marmara’nın kalbinde, sadece bilenlerin gittiği o gizli noktaları keşfetmeye hazır mısınız? Mudanya’nın falezlerinden Karacabey’in Longoz ormanlarına uzanan Bursa sahil şeridinde, kalabalıktan uzak, doğayla baş başa kalabileceğiniz en iyi saklı koyları araştırdık.",
+            "image": "/blogs/img-1.jpg",
+            "slug": "kimse-bilmiyor-bursa-da-gorenleri-ege-de-hissettiren-5-gizli-yer",
+            "date": "2026-01-01"
+        },
+        {
+            "id": 2,
+            "title": "İstanbul’un Gözü: Galata Kulesi’nden Şehre Bakış",
+            "description": "Cenevizlilerden Osmanlı’ya uzanan mirasıyla İstanbul’un siluetini taçlandıran Galata Kulesi, ziyaretçilerine 67 metreden kesintisiz bir tarih şöleni sunuyor. Haliç’in parıltısından Tarihi Yarımada’nın görkemine kadar şehrin tüm renkleri, Hezarfen’in kanat çırptığı bu eşsiz noktada birleşiyor.",
+            "image": "/blogs/img-2.png",
+            "slug": "istanbulun-gozu-galata-kulesi-nden-sehre-bakis",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 3,
+            "title": "Taşların Dili: Akdamar Kilisesi Kabartmaları ve Gizemli Hikayeleri",
+            "description": "Van’ın inanç turizmi merkezi Akdamar Adası, 2026 yılına yoğun ilgiyle girdi. Mimar Keşiş Manuel’in 10. yüzyılda inşa ettiği kilise, dış cephesindeki kutsal kitap betimlemeleriyle yerli ve yabancı turistlerin odak noktası olmayı sürdürüyor. Ada, özellikle baharda açan badem çiçekleriyle kentin en pop...",
+            "image": "/blogs/img-3.png",
+            "slug": "tasarim-acilan-turist-gelismesi-akdamar-kilisesi",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 4,
+            "title": "Turistlerin Yeni Rotası: Boğaz’ın Tarihi Yalıları",
+            "description": "İstanbul’un silüetini süsleyen, her biri ayrı bir hikayeye ev sahipliği yapan tarihi ahşap yalılar, son yıllarda kültür turizminin yükselen yıldızı haline geldi.",
+            "image": "/blogs/img-4.png",
+            "slug": "turistlerin-yeni-rotasi-bogazin-tarihi-yalilari",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 5,
+            "title": "500 Bin Yıllık İlk Apartman: Antalya’da Zamanda Yolculuğa Hazır mısınız?",
+            "description": "Şehir merkezinden sadece yarım saat uzaklıkta, devasa sarkıtların ve binlerce yıllık gizemin içinde kaybolmaya hazır olun. Burası, Anadolu’nun bilinen en eski yerleşim birimi: Karain Mağarası. Modern insanın atalarının 500 bin yıl boyunca kesintisiz olarak ev dediği bu devasa mağara, ziyaretçileri...",
+            "image": "/blogs/img-5.png",
+            "slug": "500-bin-yillik-ilk-apartman-antalya-da-zamanda-yolculuga-hazir-misiniz",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 6,
+            "title": "Gaziantep Kalesi’nin Sırrı: Tarihe Açılan Kapılar ve Yeniden Doğuş",
+            "description": "Gaziantep’in kalbinde, Alleben Deresi’nin güneyinde yükselen ve 6000 yıllık bir höyük üzerine kurulu olan Gaziantep Kalesi, son yılların en büyük sınavından geçti.",
+            "image": "/blogs/img-6.png",
+            "slug": "gaziantep-kalesi-nin-siri-tarihe-acilan-kapilar-ve-yeniden-dogus",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 7,
+            "title": "Cumhuriyet Tarihinin Yazlık Köşkü: Yalova Atatürk Köşkü",
+            "description": "Cumhuriyet tarihimizin en kritik kararlarının alındığı, modern Türkiye’nin yazlık çalışma ofisi olarak bilinen Yalova Atatürk Köşkü, yerli ve yabancı turistlerin odak noktası olmaya devam ediyor.",
+            "image": "/blogs/img-7.png",
+            "slug": "cumhuriyet-tarihinin-yazlik-koseku-yalova-ataturk-koseku",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 8,
+            "title": "Fizik ve Sanatın Buluştuğu Nokta: Miletos Tiyatrosu’nda Akustik Mucize",
+            "description": "Aydın’ın Didim ilçesinde yer alan Miletos Antik Tiyatrosu, sadece mimarisiyle değil, ses iletim kapasitesiyle de dikkat çekiyor. Oturma sıralarının eğiminden kullanılan mermerin yüzey dokusuna kadar her detayın ses dalgalarını yönetmek için tasarlandığı yapı, antik dünyanın akustik mirasını günümüze...",
+            "image": "/blogs/img-8.png",
+            "slug": "fizik-ve-sanatin-bulustugu-nokta-miletos-tiyatrosunda-akustik-mucize",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 9,
+            "title": "Gizli Bahçelerin Mimarı: Antakya’da Geleneksel Konut Kültürü",
+            "description": "Dar sokakların ardında gizlenen, yüksek duvarların arkasından sarkan zakkumların ve turunç kokularının davet ettiği Antakya’nın tarihi avlulu evleri, şehrin kültürel kimliğini korumaya devam ediyor.",
+            "image": "/blogs/img-9.png",
+            "slug": "gizli-bahcelerin-mimar-antakya-da-geleneksel-konut-kultur",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 10,
+            "title": "Şifalı Bir Yeraltı Dünyası: Narlıkuyu Astım Mağarası",
+            "description": "Mersin’in Erdemli ilçesine bağlı Narlıkuyu’da, yerin metrelerce altında saklı bir doğa harikası bulunuyor: Astım Mağarası. Sadece görsel bir şölen sunmakla kalmayan bu mağara, adından da anlaşılacağı üzere binlerce yıldır solunum yolu rahatsızlığı çekenlere bir umut ışığı oluyor.",
+            "image": "/blogs/img-10.png",
+            "slug": "sifali-bir-yeralti-dunyasi-narlikuyu-astim-magaras",
+            "date": "2026-01-02"
+        },
+        {
+            "id": 11,
+            "title": "Selimiye’nin Saklı Mücevheri: Bir Ters Lalenin Peşinde Edirne",
+            "description": "Dünyanın en görkemli yapılarından biri olan Mimar Sinan’ın ustalık eseri Selimiye Camii, ziyaretçilerine sadece taşın ve mermerin en zarif halini sunmakla kalmıyor; içinde gizlediği küçük bir sırla misafirlerini bir dedektif gibi iz sürmeye davet ediyor. Edirne seyahatinizin en merak uyandırıcı dura...",
+            "image": "/blogs/img-11.png",
+            "slug": "selimiyenin-sakli-mucevheri-bir-ters-lalenin-pesinde-edirne",
+            "date": "2026-01-02"
+        }
+    ]
+}
