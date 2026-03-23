@@ -20,10 +20,12 @@ async function getPackage(code) {
     .eq('is_active', true)
     .single()
   if (error || !data) return null
-  const scans = (data.package_scans || []).map((s) => ({
-    ...s,
-    image_path: s.image_path ? getStorageUrl(s.image_path) : null,
-  }))
+  const scans = (data.package_scans || [])
+    .filter((s) => s.status === 'approved')
+    .map((s) => ({
+      ...s,
+      image_path: s.image_path ? getStorageUrl(s.image_path) : null,
+    }))
   const firstScan = scans.sort((a, b) => new Date(a.created_at) - new Date(b.created_at))[0]
   const totalKm = totalKmFromScans(scans)
   const cities = new Set(scans.map((s) => s.province).filter(Boolean)).size

@@ -6,7 +6,7 @@ export const metadata = {
     default: 'Türkiye’yi Keşfet | GezginKitap',
   },
   description:
-    'Görmelisin, tatmalısın, almalısın, gitmeli ve kalmalısın kategorilerinde Türkiye rotaları, kültür ve turizm yazıları.',
+    'Görmelisin, tatmalısın, almalısın, gitmelisin ve kalmalısın kategorilerinde Türkiye rotaları, kültür ve turizm yazıları.',
   openGraph: {
     type: 'website',
     locale: 'tr_TR',

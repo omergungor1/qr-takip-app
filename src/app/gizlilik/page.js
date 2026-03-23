@@ -35,7 +35,7 @@ export default function GizlilikPage() {
           </p>
           <p>
             <strong>Paylaştığınız fotoğraf, isim ve mesajlar KVKK yönetmeliği çerçevesinde web sitemizde ve
-            gezgin kitapla ilgili tüm mecralarda yayınlanabilir.</strong> Formu göndererek bu kullanımı onaylamış kabul edilirsiniz.
+              gezgin kitapla ilgili tüm mecralarda yayınlanabilir.</strong> Formu göndererek bu kullanımı onaylamış kabul edilirsiniz.
           </p>
 
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-2">3. Verilerin Paylaşımı</h2>
@@ -66,7 +66,7 @@ export default function GizlilikPage() {
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-2">7. Haklarınız</h2>
           <p>
             KVKK’ya göre kişisel verilerinize erişim, düzeltme, silme ve işlemenin kısıtlanması gibi
-            taleplerde bulunabilirsiniz. Talepleriniz için: <a href="mailto:info@gezginkitap.com" className="text-[var(--primary)] underline">info@gezginkitap.com</a>.
+            taleplerde bulunabilirsiniz. Talepleriniz için: <a href="mailto:gezginkitaptv@gmail.com" className="text-[var(--primary)] underline">gezginkitaptv@gmail.com</a>.
           </p>
 
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-2">8. Değişiklikler</h2>

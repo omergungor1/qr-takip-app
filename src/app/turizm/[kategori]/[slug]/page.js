@@ -2,45 +2,47 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { TURIZM_CATEGORIES, getTurizmCategoryLabel, isValidTurizmCategory } from '@/lib/turizm-categories'
-import { getMockTurizmBlogs, getMockBlogBySlug, buildMockArticleHtml } from '@/lib/mock-turizm-blogs'
+import { createClient } from '@/lib/supabase-server'
+import { mapExploreRow } from '@/lib/explore-content'
 import { getPublicSiteBase } from '@/lib/site-url'
 import Breadcrumb from '@/components/Breadcrumb'
 import BlogShareButtons from '@/components/BlogShareButtons'
 import TurizmBlogCard from '@/components/TurizmBlogCard'
 
 export function generateStaticParams() {
-  const blogs = getMockTurizmBlogs()
-  const out = []
-  for (const c of TURIZM_CATEGORIES) {
-    for (const b of blogs) {
-      out.push({ kategori: c.id, slug: b.slug })
-    }
-  }
-  return out
+  return []
 }
 
 export async function generateMetadata({ params }) {
   const { kategori, slug } = await params
   if (!isValidTurizmCategory(kategori)) return { title: 'Bulunamadı' }
-  const blog = getMockBlogBySlug(slug)
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('explore_contents')
+    .select('*')
+    .eq('category', kategori)
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .single()
+  const blog = data ? mapExploreRow(data) : null
   if (!blog) return { title: 'Bulunamadı' }
   const catLabel = getTurizmCategoryLabel(kategori)
   const base = getPublicSiteBase()
   const path = `/turizm/${kategori}/${slug}`
   const pageUrl = base ? `${base}${path}` : undefined
   const imageUrl =
-    blog.image?.startsWith('http') ? blog.image : base && blog.image ? `${base}${blog.image}` : blog.image || undefined
+    blog.cover_url?.startsWith('http') ? blog.cover_url : base && blog.cover_url ? `${base}${blog.cover_url}` : blog.cover_url || undefined
 
   return {
     title: blog.title,
-    description: blog.description,
+    description: blog.description || undefined,
     ...(pageUrl ? { alternates: { canonical: pageUrl } } : {}),
     openGraph: {
       title: blog.title,
       description: blog.description,
       ...(pageUrl ? { url: pageUrl } : {}),
       type: 'article',
-      publishedTime: blog.date,
+      publishedTime: blog.published_at || undefined,
       images: imageUrl ? [{ url: imageUrl, alt: blog.title }] : undefined,
     },
     twitter: {
@@ -60,18 +62,33 @@ export default async function TurizmBlogDetailPage({ params }) {
   const { kategori, slug } = await params
   if (!isValidTurizmCategory(kategori)) notFound()
 
-  const blog = getMockBlogBySlug(slug)
+  const supabase = await createClient()
+  const { data: row } = await supabase
+    .from('explore_contents')
+    .select('*')
+    .eq('category', kategori)
+    .eq('slug', slug)
+    .eq('status', 'published')
+    .single()
+  const blog = row ? mapExploreRow(row) : null
   if (!blog) notFound()
 
   const label = getTurizmCategoryLabel(kategori)
   const base = getPublicSiteBase()
   const path = `/turizm/${kategori}/${slug}`
   const shareUrl = base ? `${base}${path}` : undefined
-  const html = buildMockArticleHtml(blog, label)
-  const cover = blog.cover_image || blog.image
+  const html = blog.content || `<p>${blog.description || ''}</p>`
+  const cover = blog.cover_url
 
-  const all = getMockTurizmBlogs()
-  const related = all.filter((b) => b.slug !== slug).slice(0, 3)
+  const { data: relatedRows } = await supabase
+    .from('explore_contents')
+    .select('*')
+    .eq('category', kategori)
+    .eq('status', 'published')
+    .neq('slug', slug)
+    .order('published_at', { ascending: false })
+    .limit(3)
+  const related = (relatedRows || []).map(mapExploreRow)
 
   const absoluteCover = cover ? (cover.startsWith('http') ? cover : base ? `${base}${cover}` : undefined) : undefined
   const pageUrlForSchema = base ? `${base}${path}` : undefined
@@ -80,9 +97,9 @@ export default async function TurizmBlogDetailPage({ params }) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: blog.title,
-    description: blog.description,
+    description: blog.description || '',
     ...(absoluteCover ? { image: absoluteCover } : {}),
-    datePublished: blog.date,
+    datePublished: blog.published_at || undefined,
     author: {
       '@type': 'Organization',
       name: 'GezginKitap',
@@ -118,9 +135,9 @@ export default async function TurizmBlogDetailPage({ params }) {
                 >
                   {label}
                 </Link>
-                {blog.date && (
-                  <time dateTime={blog.date} className="text-sm text-slate-500">
-                    {new Date(blog.date).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
+                {blog.published_at && (
+                  <time dateTime={blog.published_at} className="text-sm text-slate-500">
+                    {new Date(blog.published_at).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
                   </time>
                 )}
               </div>
@@ -155,7 +172,7 @@ export default async function TurizmBlogDetailPage({ params }) {
                   <p className="font-bold text-slate-900" style={{ fontFamily: 'var(--font-heading), ui-sans-serif, system-ui, sans-serif' }}>
                     GezginKitap Keşif Editörü
                   </p>
-                  <p className="text-sm text-slate-600 mt-1">Türkiye rotaları ve kültür içerikleri — turizm rehberi (örnek veri).</p>
+                  <p className="text-sm text-slate-600 mt-1">Türkiye rotaları ve kültür içerikleri — turizm rehberi.</p>
                 </div>
               </div>
             </div>

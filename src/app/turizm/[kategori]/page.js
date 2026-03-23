@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { TURIZM_CATEGORIES, getTurizmCategoryLabel, isValidTurizmCategory } from '@/lib/turizm-categories'
-import { getMockTurizmBlogs } from '@/lib/mock-turizm-blogs'
+import { createClient } from '@/lib/supabase-server'
+import { mapExploreRow } from '@/lib/explore-content'
 import Breadcrumb from '@/components/Breadcrumb'
 import TurizmBlogCard from '@/components/TurizmBlogCard'
 
@@ -28,7 +29,15 @@ export default async function TurizmKategoriListPage({ params }) {
   if (!isValidTurizmCategory(kategori)) notFound()
 
   const label = getTurizmCategoryLabel(kategori)
-  const blogs = getMockTurizmBlogs()
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('explore_contents')
+    .select('*')
+    .eq('category', kategori)
+    .eq('status', 'published')
+    .order('published_at', { ascending: false })
+    .order('created_at', { ascending: false })
+  const blogs = (data || []).map(mapExploreRow)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[var(--background)] to-white">
@@ -50,7 +59,7 @@ export default async function TurizmKategoriListPage({ params }) {
             {label}: keşif yazıları
           </h1>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Bu sayfada örnek turizm içerikleri listelenir; tüm kategoriler şu an aynı koleksiyonu kullanmaktadır. Yakında her kategori için özel içerikler sunulacaktır.
+            Bu kategoride yayınlanan keşif içeriklerini burada bulabilirsiniz.
           </p>
           <div className="mt-6 flex flex-wrap gap-2">
             {TURIZM_CATEGORIES.filter((c) => c.id !== kategori).map((c) => (
@@ -70,6 +79,9 @@ export default async function TurizmKategoriListPage({ params }) {
             <TurizmBlogCard key={blog.id} blog={blog} kategori={kategori} />
           ))}
         </div>
+        {blogs.length === 0 && (
+          <p className="text-slate-500 text-center py-10">Bu kategoride henüz yayınlanmış içerik yok.</p>
+        )}
       </div>
     </div>
   )

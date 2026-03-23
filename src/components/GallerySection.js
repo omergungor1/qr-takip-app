@@ -18,10 +18,10 @@ export default function GallerySection({ scans }) {
     <section className="py-12 sm:py-16 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-2">
-          Son Fotoğraflar
+          YOL ARKADAŞI
         </h2>
         <p className="text-[var(--text-light)] mb-8">
-          Son check-in fotoğrafları
+          Her Kitap Bir Yolcu, Her Okur Bir Yol Arkadaşı.
         </p>
 
         <div className="relative">

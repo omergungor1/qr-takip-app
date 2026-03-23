@@ -17,10 +17,12 @@ async function getPackages() {
     .order('created_at', { ascending: false })
   const packages = (data || []).map((p) => ({
     ...p,
-    package_scans: (p.package_scans || []).map((s) => ({
-      ...s,
-      image_path: s.image_path ? getStorageUrl(s.image_path) : null,
-    })),
+    package_scans: (p.package_scans || [])
+      .filter((s) => s.status === 'approved')
+      .map((s) => ({
+        ...s,
+        image_path: s.image_path ? getStorageUrl(s.image_path) : null,
+      })),
   }))
   return packages
 }
@@ -37,10 +39,10 @@ export default async function HaritaPage() {
         <p className="text-[var(--text-light)] text-center mb-6 max-w-2xl mx-auto">
           Kitapların son konumları ve gezindiği rotayı görün. Bir kitaba tıklayarak pasaport sayfasına gidebilirsiniz.
         </p>
-        <PackageTicker packages={packages} />
         <div className="mt-6">
           <MapSection packages={packages} />
         </div>
+        <PackageTicker packages={packages} />
       </div>
     </div>
   )

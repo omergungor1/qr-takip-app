@@ -4,33 +4,66 @@ import { useState } from 'react'
 
 export default function EmailSubscription() {
   const [email, setEmail] = useState('')
-  const [status, setStatus] = useState('') // 'loading' | 'success' | 'error'
+  const [status, setStatus] = useState('') // idle | loading | success | error | already
   const [message, setMessage] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     setMessage('')
     setStatus('loading')
+    const form = e.currentTarget
+    const formData = new FormData(form)
+    const rawEmail = (formData.get('email') || '').toString().trim()
+    const honeypot = (formData.get('website') || '').toString().trim()
+
     try {
       const res = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: rawEmail, website: honeypot }),
       })
-      const data = await res.json()
+      const data = await res.json().catch(() => ({}))
+
+      if (res.status === 429) {
+        setStatus('error')
+        setMessage(data?.error || 'Çok fazla deneme. Lütfen daha sonra tekrar deneyin.')
+        return
+      }
+
       if (!res.ok) {
         setStatus('error')
         setMessage(data?.error || 'Bir hata oluştu.')
         return
       }
-      setStatus('success')
-      setEmail('')
-      setMessage('E-posta listemize eklendiniz. Teşekkürler!')
+
+      if (data?.alreadySubscribed) {
+        setStatus('already')
+        setMessage(data?.message || 'Bu e-posta adresi zaten listemizde kayıtlı.')
+        return
+      }
+
+      if (data?.success) {
+        setStatus('success')
+        setEmail('')
+        form.reset()
+        setMessage(data?.message || 'Teşekkür ederiz! E-posta listemize başarıyla eklendiniz.')
+        return
+      }
+
+      setStatus('error')
+      setMessage('Beklenmeyen yanıt.')
     } catch {
       setStatus('error')
       setMessage('Bağlantı hatası.')
     }
   }
+
+  const messageClass =
+    status === 'error'
+      ? 'text-red-600'
+      : status === 'already'
+        ? 'text-amber-800'
+        : 'text-[var(--accent)]'
 
   return (
     <section className="py-12 sm:py-16 bg-[var(--primary)]/10 border-t border-[var(--primary)]/20">
@@ -41,26 +74,42 @@ export default function EmailSubscription() {
         <p className="text-[var(--text-light)] text-sm sm:text-base mb-6">
           GezginKitap projesinin en güncel hareketlerini, yeni kitap yolculuklarını ve sürpriz etkinlikleri öğrenmek için mail listemize katılın.
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 justify-center">
+        <form
+          onSubmit={handleSubmit}
+          className="relative flex flex-col sm:flex-row gap-3 justify-center"
+          noValidate
+        >
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            defaultValue=""
+            className="absolute left-0 top-0 h-px w-px opacity-0 overflow-hidden pointer-events-none"
+          />
           <input
             type="email"
+            name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-posta adresiniz"
             required
-            disabled={status === 'success'}
+            disabled={status === 'loading'}
+            autoComplete="email"
+            maxLength={254}
             className="flex-1 min-w-0 rounded-xl border border-slate-300 px-4 py-3 text-[var(--foreground)] bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
           />
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="rounded-xl bg-[var(--primary)] text-white font-semibold px-6 py-3 shadow-sm hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="rounded-xl bg-[var(--primary)] text-white font-semibold px-6 py-3 shadow-sm hover:opacity-90 transition-opacity disabled:opacity-50 min-h-[44px]"
           >
             {status === 'loading' ? 'Gönderiliyor...' : 'Abone Ol'}
           </button>
         </form>
         {message && (
-          <p className={`mt-3 text-sm ${status === 'error' ? 'text-red-600' : 'text-[var(--accent)]'}`}>
+          <p role="status" className={`mt-3 text-sm font-medium ${messageClass}`}>
             {message}
           </p>
         )}

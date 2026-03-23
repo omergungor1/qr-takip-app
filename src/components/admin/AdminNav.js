@@ -28,6 +28,8 @@ export default function AdminNav({ user }) {
     { href: '/admin/packages', label: 'Kitaplar' },
     { href: '/admin/news', label: 'Haberler' },
     { href: '/admin/blogs', label: 'Bloglar' },
+    { href: '/admin/explore', label: 'Keşfet' },
+    { href: '/admin/subscribers', label: 'Aboneler' },
     { href: '/admin/settings', label: 'Ayarlar' },
     { href: '/admin/images', label: 'Görseller' },
   ]

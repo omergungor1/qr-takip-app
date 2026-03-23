@@ -39,7 +39,7 @@ export default function KvkkPage() {
           </p>
           <p>
             <strong>Paylaştığınız fotoğraf, isim ve mesajlar KVKK yönetmeliği çerçevesinde web sitemizde ve
-            gezgin kitapla ilgili tüm mecralarda yayınlanabilir.</strong> Check-in göndererek bu kullanımı kabul etmiş sayılırsınız.
+              gezgin kitapla ilgili tüm mecralarda yayınlanabilir.</strong> Check-in göndererek bu kullanımı kabul etmiş sayılırsınız.
           </p>
 
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-2">4. Hukuki Sebep</h2>
@@ -66,7 +66,7 @@ export default function KvkkPage() {
             buna ilişkin bilgi talep etme, işlenme amacını ve amacına uygun kullanılıp kullanılmadığını
             öğrenme, yurt içinde veya yurt dışında aktarıldığı üçüncü kişileri bilme, eksik veya yanlış
             işlenmişse düzeltilmesini isteme, silinmesini veya yok edilmesini isteme haklarına sahipsiniz.
-            İlgili talepleriniz için: <a href="mailto:info@gezginkitap.com" className="text-[var(--primary)] underline">info@gezginkitap.com</a>.
+            İlgili talepleriniz için: <a href="mailto:gezginkitaptv@gmail.com" className="text-[var(--primary)] underline">gezginkitaptv@gmail.com</a>.
           </p>
 
           <p className="mt-8 text-sm text-[var(--text-light)]">

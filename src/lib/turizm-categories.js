@@ -1,10 +1,10 @@
 /** Keşfet kategorileri — liste ve detay rotalarında ortak kullanım */
 export const TURIZM_CATEGORIES = [
+  { id: 'gitmelisin', label: 'Gitmelisin' },
+  { id: 'kalmalisin', label: 'Kalmalısın' },
   { id: 'gormelisin', label: 'Görmelisin' },
   { id: 'almalisin', label: 'Almalısın' },
   { id: 'tatmalisin', label: 'Tatmalısın' },
-  { id: 'gitmeli', label: 'Gitmeli' },
-  { id: 'kalmalisin', label: 'Kalmalısın' },
 ]
 
 export function isValidTurizmCategory(id) {

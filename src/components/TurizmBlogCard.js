@@ -3,7 +3,8 @@ import Link from 'next/link'
 
 export default function TurizmBlogCard({ blog, kategori }) {
   const href = `/turizm/${kategori}/${blog.slug}`
-  const cover = blog.cover_image || blog.image
+  const cover = blog.cover_url || blog.cover_image || blog.image
+  const date = blog.published_at || blog.date
 
   return (
     <article className="group rounded-2xl border border-slate-200/80 bg-white overflow-hidden shadow-sm hover:shadow-xl hover:border-[var(--primary)]/25 transition-all duration-300">
@@ -23,9 +24,9 @@ export default function TurizmBlogCard({ blog, kategori }) {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 via-transparent to-transparent opacity-80 pointer-events-none" aria-hidden />
         </div>
         <div className="p-4 sm:p-5">
-          {blog.date && (
-            <time dateTime={blog.date} className="text-xs font-medium text-[var(--primary)] uppercase tracking-wide">
-              {new Date(blog.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
+          {date && (
+            <time dateTime={date} className="text-xs font-medium text-[var(--primary)] uppercase tracking-wide">
+              {new Date(date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}
             </time>
           )}
           <h3 className="font-bold text-slate-900 text-lg sm:text-xl mt-2 line-clamp-2 group-hover:text-[var(--primary)] transition-colors" style={{ fontFamily: 'var(--font-heading), ui-sans-serif, system-ui, sans-serif' }}>

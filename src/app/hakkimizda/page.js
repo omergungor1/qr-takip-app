@@ -12,8 +12,12 @@ export default function HakkimizdaPage() {
         </h1>
         <div className="prose prose-slate max-w-none space-y-4 text-[var(--foreground)]">
           <p className="leading-relaxed">
-            <strong>GezginKitap</strong>, Türkiye genelinde dolaşan kitapların yolculuğunu QR kod ile takip etmenizi sağlayan bir projedir.
-            Kitaplar şehirler arası yol alır; her durakta QR kodu okutan gezginler mesaj ve fotoğraf bırakır.
+            <strong>GezginKitap</strong>, okuma kültürünü dijital dünyanın imkânlarıyla birleştiren, kitapların raflarda
+            hapsolmak yerine elden ele, şehirden şehre gezmesini sağlayan interaktif bir kültür hareketidir.
+          </p>
+          <p className="leading-relaxed">
+            Bu proje, her kitabın bir ruhu ve anlatacak bir hikâyesi olduğuna inanır. GezginKitap ile bir eser yalnızca
+            okunmakla kalmaz; üzerine notlar düşülür, anılar eklenir ve yeni bir okura ulaşmak üzere yolculuğa uğurlanır.
           </p>
           <p className="leading-relaxed">
             <strong>Kitaplar nasıl çalışır?</strong> Her kitabın üzerinde bir QR kod bulunur. Kitabı bulduğunuz yerde

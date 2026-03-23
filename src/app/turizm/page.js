@@ -12,7 +12,7 @@ const cardIntro = {
   gormelisin: 'Manzara, tarih ve mimari duraklar — gözünüze hitap eden rotalar.',
   almalisin: 'Yöresel ürünler, el işçiliği ve hatıra seçenekleri.',
   tatmalisin: 'Lezzet durakları ve yerel mutfak deneyimleri.',
-  gitmeli: 'Konum ve rota odaklı öneriler — yola çıkmaya değer yerler.',
+  gitmelisin: 'Konum ve rota odaklı öneriler — yola çıkmaya değer yerler.',
   kalmalisin: 'Konaklama ve sakin mola önerileri; şehirden uzaklaşmak için.',
 }
 
@@ -36,7 +36,7 @@ export default function TurizmHubPage() {
             Türkiye’yi Keşfet
           </h1>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Beş kategori altında toplanan yazılarla rotanızı zenginleştirin. Şimdilik tüm kategoriler aynı örnek içerik listesini gösterir; ileride her kategori için ayrı içerikler bağlanacaktır.
+            Beş kategori altında toplanan yazılarla rotanızı zenginleştirin. İçerikler admin panelinden yönetilir ve yayınlanan yazılar kategori sayfalarında otomatik listelenir.
           </p>
         </header>
 

@@ -22,7 +22,7 @@ export default function Footer() {
               <li><Link href="/hakkimizda" className="hover:text-[var(--secondary)]">Proje Hakkında</Link></li>
               <li><Link href="/kvkk" className="hover:text-[var(--secondary)]">KVKK Aydınlatma Metni</Link></li>
               <li><Link href="/gizlilik" className="hover:text-[var(--secondary)]">Gizlilik Sözleşmesi</Link></li>
-              <li><Link href="/admin" className="hover:text-[var(--secondary)]">Admin</Link></li>
+              <li><Link href="/admin" className="hover:text-[var(--secondary)]" target="_blank">Admin</Link></li>
               <li className="pt-2 mt-2 border-t border-slate-600">
                 <span className="text-slate-500 text-xs uppercase tracking-wide">İlgili siteler</span>
               </li>
@@ -42,7 +42,7 @@ export default function Footer() {
           </div>
           <div>
             <h3 className="font-semibold text-white mb-3">İletişim</h3>
-            <p className="text-sm mb-3">Sorularınız için: info@gezginkitap.com</p>
+            <p className="text-sm mb-3">Sorularınız için: gezginkitaptv@gmail.com</p>
             <div className="flex items-center gap-2">
               <a href="#" className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-slate-300 hover:bg-[var(--primary)] hover:text-white transition-colors" aria-label="Twitter">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>

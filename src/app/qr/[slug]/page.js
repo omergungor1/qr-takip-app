@@ -19,7 +19,10 @@ async function getPackage(slug) {
     .eq('is_active', true)
     .single()
   if (error || !data) return null
-  return data
+  return {
+    ...data,
+    package_scans: (data.package_scans || []).filter((s) => s.status === 'approved'),
+  }
 }
 
 export default async function QrCheckInPage({ params }) {

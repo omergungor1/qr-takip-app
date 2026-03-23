@@ -1,6 +1,4 @@
 import { createClient } from '@/lib/supabase-server'
-import MapSection from '@/components/MapSection'
-import IntroSection from '@/components/IntroSection'
 import StatsSection from '@/components/StatsSection'
 import TurizmKategoriButtons from '@/components/TurizmKategoriButtons'
 import InfoCardsSection from '@/components/InfoCardsSection'
@@ -24,7 +22,7 @@ async function getData() {
     supabase.from('packages').select('*, package_scans(*)').eq('is_active', true).order('created_at', { ascending: false }),
     supabase.from('news').select('*').eq('is_active', true).not('published_at', 'is', null).order('published_at', { ascending: false }).limit(6),
     supabase.from('blogs').select('*').eq('is_active', true).not('published_at', 'is', null).order('published_at', { ascending: false }).limit(6),
-    supabase.from('package_scans').select('*').order('created_at', { ascending: false }).limit(500),
+    supabase.from('package_scans').select('*').eq('status', 'approved').order('created_at', { ascending: false }).limit(500),
   ])
 
   const packages = packagesRes.data || []
@@ -44,10 +42,12 @@ async function getData() {
 
   const packagesWithScans = packages.map((p) => ({
     ...p,
-    package_scans: (p.package_scans || []).map((s) => ({
-      ...s,
-      image_path: s.image_path ? getStorageUrl(s.image_path) : null,
-    })),
+    package_scans: (p.package_scans || [])
+      .filter((s) => s.status === 'approved')
+      .map((s) => ({
+        ...s,
+        image_path: s.image_path ? getStorageUrl(s.image_path) : null,
+      })),
   }))
 
   const fourteenDaysAgo = new Date()
@@ -96,11 +96,10 @@ export default async function Home() {
         <InfoCardsSection />
         <GallerySection scans={scans} />
         <WantedBooksSection wantedBooks={wantedBooks} />
-        <IntroSection />
 
         <section className="py-12 sm:py-16 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Gezgin Blogları</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Gezgin Haberleri</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {blogs.map((blog) => (
                 <BlogCard key={blog.id} blog={blog} />
@@ -114,7 +113,7 @@ export default async function Home() {
 
         <section className="py-12 sm:py-16 bg-[var(--background)]">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Haberler</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Gezgin Kitap Haberleri</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {news.map((n) => (
                 <NewsCard key={n.id} news={n} />

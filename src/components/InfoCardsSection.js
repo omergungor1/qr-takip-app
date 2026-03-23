@@ -7,51 +7,55 @@ const INFO_ITEMS = [
     id: 'nedir',
     title: 'Gezgin kitap nedir?',
     icon: '📖',
-    content: `Gezgin kitap, bir okurdan diğerine yolculuk eden fiziksel bir kitaptır. Kitabın kapağında veya içinde yer alan QR kodu okutarak check-in yaparsınız; kitabı okuduktan sonra başka bir yere (kafe, bank, kütüphane, otobüs durağı vb.) bırakırsınız. Bir sonraki bulan kişi aynı kitabı alır, check-in yapar ve yolculuk böyle devam eder.
-
-Bu proje sayesinde kitaplar şehir şehir, el ele dolaşır. Haritada her kitabın izlediği rota ve son konumu görülebilir. Hem okuma alışkanlığını yaygınlaştırmak hem de insanları kitaplar etrafında bir araya getirmek hedeflenir.`,
+    content: `Gezgin Kitap, okuma kültürünü dijital dünyanın imkanlarıyla birleştiren, kitapların raflarda hapsolmak yerine elden ele, şehirden şehre gezmesini sağlayan interaktif bir kültür hareketidir. 
+    
+    Bu proje, her kitabın bir ruhu ve anlatacak bir hikayesi olduğuna inanır. Gezgin Kitap ile bir eser sadece okunmakla kalmaz; üzerine notlar düşülür, anılar eklenir ve yeni bir okura ulaşmak üzere bir yolculuğa uğurlanır.`,
   },
   {
     id: 'nasil-calisir',
     title: 'Gezgin kitap nasıl çalışır?',
     icon: '🔄',
-    content: `1. **Bir gezgin kitap bulun** – Kütüphane, kafe, park veya başka bir kamusal alanda QR kodlu bir kitap görürseniz alabilirsiniz.
+    content: `Gezgin Kitap’ın işleyişi oldukça basit ve teknoloji odaklıdır:
 
-2. **QR kodu okutun** – Telefonunuzla kitaptaki QR kodu tarayın. Otomatik olarak check-in sayfasına yönlendirilirsiniz.
+Kayıt ve Takip: Her Gezgin Kitap, kendisine özel bir QR kod ve takip numarasına sahiptir.
 
-3. **Check-in yapın** – Bulunduğunuz şehir/ilçe bilgisini girin, isterseniz kısa bir mesaj veya fotoğraf ekleyin. Bu sayede kitabın yolculuğu haritada güncellenir.
+Okuma ve Not Bırakma: Kitabı bulan okur, QR kodu taratarak kitabın o ana kadar hangi şehirleri gezdiğini görebilir. Kitabın içine kendi duygu ve düşüncelerini içeren kısa bir not veya tarih bırakabilir.
 
-4. **Kitabı okuyun** – Keyfini çıkarın, isterseniz not alın.
+Yolculuğa Devam: Okuma süreci bittikten sonra, kitap bir banka, kafe masasına veya belirlenen bir "durak noktasına" bırakılarak yeni yolcusunu beklemeye başlar.
 
-5. **Bırakın** – Kitabı başka bir yere (bank, kafe, otobüs, tren vb.) bırakın. Bir sonraki okur bulsun diye görünür bir yere koyun.`,
+Dijital İz: Kitabı her bulan kişi sistemi güncellediğinde, kitabın rotası harita üzerinden anlık olarak izlenebilir.`,
   },
   {
     id: 'kurallar',
     title: 'Gezgin kitabın kuralları',
     icon: '✅',
-    content: `• **Kitaba zarar vermeyin** – Okuyun, paylaşın; yırtmayın, karalamayın.
+    content: `Kitabın yolculuğunun aksamaması ve topluluk ruhunun korunması için temel kurallarımız şunlardır:
 
-• **Check-in yapın** – Kitabı bulduğunuzda mutlaka QR ile check-in alın. Böylece harita güncel kalır ve kitap “kayıp” sayılmaz.
+Sahiplenme, Paylaş: Kitap size ait değildir; o bir gezgindir. Okumanız bittiğinde onu mutlaka başka birinin bulabileceği güvenli bir yere bırakın.
 
-• **Uygun yere bırakın** – Kitabı yağmur almayacak, başkalarının bulabileceği bir yere bırakın (masa, raf, bank).
+Sistemi Güncelle: Kitabı bulduğunuzda ve yeni bir yere bıraktığınızda mutlaka üzerindeki QR kodu okutarak sisteme bilgi girişi yapın.
 
-• **Sahiplenmeyin** – Gezgin kitap herkese aittir. Evinize götürüp saklamayın; okuduktan sonra bırakın.
+İz Bırak: Kitabın içine nezaket kuralları çerçevesinde küçük bir not veya bir ayraç bırakarak sonraki okura selam gönderin.
 
-• **Saygılı olun** – Mesaj ve fotoğraflarınızda herkese saygılı olun.`,
+Özen Göster: Kitabın sayfalarına zarar vermemeye ve onu hava şartlarından koruyacak şekilde bırakmaya dikkat edin.`,
   },
   {
     id: 'oduller',
     title: 'Gezgin kitap ödülleri',
     icon: '🏆',
-    content: `Projemizde düzenli aralıklarla ödüllü etkinlikler düzenlenebilir:
+    content: `Gezgin Kitap topluluğunun bir parçası olmak sadece manevi bir haz değil, aynı zamanda sürpriz fırsatlar da sunuyor! En çok kitap paylaşan, en uzak rotaya ulaşan veya sistemimizi aktif kullanan okurlarımızı gelecekte muhteşem ödüller bekliyor.
 
-• **En çok check-in** – Belirli bir dönemde en çok check-in alan kitapların okurları veya kitaplar ödüllendirilebilir.
+Sizleri Bekleyen Olası Ödüller:
 
-• **En uzun rota** – En fazla şehir gezen veya en çok km yapan kitaplar öne çıkarılabilir.
+Yurt içi ve yurt dışı tatil paketleri,
 
-• **Sürpriz ödüller** – “Wanted” (uzun süredir check-in almayan) kitapları bulan ilk kişiye sürpriz ödül verilebilir.
+Seçkin restoranlarda akşam yemekleri ve ziyafetler,
 
-Ödül duyuruları web sitemiz ve sosyal medya hesaplarımızdan paylaşılır. Katılım koşulları her etkinlikte ayrıca belirtilir.`,
+En sevilen sanatçıların konser biletleri,
+
+Sezonun en iyi oyunları için tiyatro biletleri ve çok daha fazlası.
+
+Önemli Not: Ödül kategorileri ve kazananlar belirlendikten sonra güncel duyurularımız www.gezginkitap.com web sitemizden ve resmi sosyal medya hesaplarımızdan ilan edilecektir. Takipte kalın, kitabınız gezdikçe siz kazanın!`,
   },
 ]
 
