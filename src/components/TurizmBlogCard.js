@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function TurizmBlogCard({ blog, kategori }) {
-  const href = `/turizm/${kategori}/${blog.slug}`
+export default function TurizmBlogCard({ blog }) {
+  const href = `/kesfet/${blog.slug}`
   const cover = blog.cover_url || blog.cover_image || blog.image
   const date = blog.published_at || blog.date
 

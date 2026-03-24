@@ -43,13 +43,12 @@ export default async function AdminExplorePage({ searchParams }) {
           <Link
             key={s}
             href={`/admin/explore?status=${s}`}
-            className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${
-              status === s
+            className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${status === s
                 ? 'bg-[var(--primary)] text-white border-[var(--primary)]'
                 : 'bg-white text-slate-700 border-slate-200 hover:border-[var(--primary)]/50'
-            }`}
+              }`}
           >
-            {s === 'draft' ? 'Draft' : s === 'published' ? 'Published' : 'Removed'}
+            {s === 'draft' ? 'Taslak' : s === 'published' ? 'Yayınlandı' : 'Silindi'}
           </Link>
         ))}
       </div>

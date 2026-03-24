@@ -35,7 +35,7 @@ const ICONS = {
 
 const CATEGORIES = TURIZM_CATEGORIES.map((c) => ({
   ...c,
-  href: `/turizm/${c.id}`,
+  href: `/kesfet/${c.id}`,
   icon: ICONS[c.id],
 }))
 

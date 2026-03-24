@@ -7,7 +7,7 @@ import Image from 'next/image'
 const navLinks = [
   { href: '/', label: 'Ana Sayfa' },
   { href: '/harita', label: 'Harita' },
-  { href: '/turizm', label: 'Keşfet' },
+  { href: '/kesfet', label: 'Keşfet' },
   { href: '/blog', label: 'Blog' },
   { href: '/haber', label: 'Haberler' },
   { href: '/hakkimizda', label: 'Proje Hakkında' },

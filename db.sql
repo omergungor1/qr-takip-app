@@ -176,6 +176,7 @@ create table explore_contents (
     category explore_category not null,
 
     cover_image text, -- supabase storage path
+    video_url text, -- youtube/video link
 
     status explore_status default 'draft',
 

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase'
 import { TURIZM_CATEGORIES } from '@/lib/turizm-categories'
 import { toExploreSlug } from '@/lib/explore-content'
+import { getStorageUrl } from '@/lib/utils'
 
 const MAX_IMAGE_BYTES = 2 * 1024 * 1024
 
@@ -17,12 +18,14 @@ export default function AdminExploreForm({ initialItem }) {
   const [slug, setSlug] = useState(initialItem?.slug || '')
   const [description, setDescription] = useState(initialItem?.description || '')
   const [content, setContent] = useState(initialItem?.content || '')
+  const [videoUrl, setVideoUrl] = useState(initialItem?.video_url || '')
   const [category, setCategory] = useState(initialItem?.category || TURIZM_CATEGORIES[0].id)
   const [status, setStatus] = useState(initialItem?.status || 'draft')
   const [publishedAt, setPublishedAt] = useState(initialItem?.published_at ? initialItem.published_at.slice(0, 16) : '')
   const [imageFile, setImageFile] = useState(null)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
+  const existingCoverUrl = initialItem?.cover_image ? getStorageUrl(initialItem.cover_image) : null
 
   const onFileChange = (file) => {
     if (!file) {
@@ -63,6 +66,7 @@ export default function AdminExploreForm({ initialItem }) {
       slug: nextSlug,
       description: description.trim() || null,
       content: content.trim() || null,
+      video_url: videoUrl.trim() || null,
       category,
       status,
       cover_image: coverPath,
@@ -151,6 +155,17 @@ export default function AdminExploreForm({ initialItem }) {
         />
       </div>
 
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">Video URL (YouTube)</label>
+        <input
+          type="url"
+          value={videoUrl}
+          onChange={(e) => setVideoUrl(e.target.value)}
+          placeholder="https://www.youtube.com/watch?v=..."
+          className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white"
+        />
+      </div>
+
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Durum</label>
@@ -159,9 +174,9 @@ export default function AdminExploreForm({ initialItem }) {
             onChange={(e) => setStatus(e.target.value)}
             className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white"
           >
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-            <option value="removed">Removed</option>
+            <option value="draft">Taslak</option>
+            <option value="published">Yayınlanmış</option>
+            <option value="removed">Silindi</option>
           </select>
         </div>
         <div>
@@ -177,6 +192,19 @@ export default function AdminExploreForm({ initialItem }) {
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">Kapak görseli (max 2MB)</label>
+        {existingCoverUrl && !imageFile && (
+          <div className="mb-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
+            <p className="text-xs text-slate-600 mb-2">Mevcut kapak görseli</p>
+            <div className="relative w-full max-w-sm aspect-[16/10] rounded-lg overflow-hidden bg-white border border-slate-200">
+              <img src={existingCoverUrl} alt="Mevcut kapak görseli" className="w-full h-full object-cover" />
+            </div>
+          </div>
+        )}
+        {imageFile && (
+          <p className="text-xs text-slate-600 mb-2">
+            Yeni seçilen dosya: <strong>{imageFile.name}</strong>
+          </p>
+        )}
         <input
           type="file"
           accept="image/*"
