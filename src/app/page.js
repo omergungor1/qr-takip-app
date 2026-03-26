@@ -12,7 +12,7 @@ import { getStorageUrl, totalKmFromScans } from '@/lib/utils'
 
 export const metadata = {
   title: 'GezginKitap',
-  description: "Kitaplar Türkiye'yi geziyor. Bir kitabı bul, check-in yap ve başka bir şehre bırak.",
+  description: "Kitaplar Türkiye'yi geziyor. Bir kitabı bul, kayıt yap ve başka bir şehre bırak.",
 }
 
 async function getData() {
@@ -92,8 +92,7 @@ export default async function Home() {
           </div>
         </section>
         <TurizmKategoriButtons />
-        <StatsSection stats={stats} />
-        <InfoCardsSection />
+
         <GallerySection scans={scans} />
         <WantedBooksSection wantedBooks={wantedBooks} />
 
@@ -124,6 +123,12 @@ export default async function Home() {
             )}
           </div>
         </section>
+
+
+        <StatsSection stats={stats} />
+        <InfoCardsSection />
+
+
       </section>
     </>
   )

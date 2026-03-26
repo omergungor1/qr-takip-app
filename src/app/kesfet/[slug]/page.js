@@ -9,11 +9,28 @@ import Breadcrumb from '@/components/Breadcrumb'
 import BlogShareButtons from '@/components/BlogShareButtons'
 import TurizmBlogCard from '@/components/TurizmBlogCard'
 
-function getVideoEmbedUrl(rawUrl) {
+function getVideoEmbed(rawUrl) {
   if (!rawUrl) return null
   try {
     const url = new URL(rawUrl)
     const host = url.hostname.replace(/^www\./, '')
+
+    // Instagram
+    // Örn: https://www.instagram.com/p/SHORTCODE/ veya /reel/SHORTCODE/
+    if (host.includes('instagram.com')) {
+      const parts = url.pathname.split('/').filter(Boolean)
+      const type = parts[0] // p | reel | tv
+      const code = parts[1]
+      if (!code) return null
+      if (type === 'p' || type === 'reel' || type === 'tv') {
+        return {
+          provider: 'instagram',
+          // Instagram embed.js permalink ister (iframe bazı içeriklerde crop yapabiliyor)
+          permalink: `https://www.instagram.com/${type}/${code}/`,
+        }
+      }
+      return null
+    }
 
     if (host.includes('youtu.be') || host.includes('youtube.com')) {
       let videoId = null
@@ -27,14 +44,24 @@ function getVideoEmbedUrl(rawUrl) {
         videoId = url.searchParams.get('v')
       }
       if (!videoId) return null
-      return `https://www.youtube-nocookie.com/embed/${videoId}`
+      return { provider: 'youtube', src: `https://www.youtube-nocookie.com/embed/${videoId}` }
     }
 
     if (host.includes('vimeo.com') || host.includes('player.vimeo.com')) {
       const parts = url.pathname.split('/').filter(Boolean)
       const numericPart = [...parts].reverse().find((p) => /^\d+$/.test(p))
       if (!numericPart) return null
-      return `https://player.vimeo.com/video/${numericPart}`
+      return { provider: 'vimeo', src: `https://player.vimeo.com/video/${numericPart}` }
+    }
+
+    // Facebook video/post
+    // Örn: https://www.facebook.com/.../videos/... veya https://fb.watch/....
+    if (host.includes('facebook.com') || host.includes('fb.watch')) {
+      const href = encodeURIComponent(rawUrl)
+      return {
+        provider: 'facebook',
+        src: `https://www.facebook.com/plugins/video.php?href=${href}&show_text=false&autoplay=false`,
+      }
     }
 
     return null
@@ -170,7 +197,7 @@ export default async function KesfetSlugPage({ params }) {
   const shareUrl = base ? `${base}${path}` : undefined
   const html = blog.content || `<p>${blog.description || ''}</p>`
   const cover = blog.cover_url
-  const videoEmbedUrl = getVideoEmbedUrl(blog.video_url)
+  const videoEmbed = getVideoEmbed(blog.video_url)
 
   const supabase = await createClient()
   const { data: relatedRows } = await supabase
@@ -234,19 +261,52 @@ export default async function KesfetSlugPage({ params }) {
                   <Image src={cover} alt={blog.title} fill className="object-cover" priority sizes="(max-width: 896px) 100vw, 896px" />
                 </div>
               )}
-              {videoEmbedUrl && (
+              {videoEmbed && (
                 <div className="mb-10">
                   <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'var(--font-heading), ui-sans-serif, system-ui, sans-serif' }}>Video</h2>
-                  <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black ring-1 ring-slate-200">
-                    <iframe
-                      src={videoEmbedUrl}
-                      title={`${blog.title} video`}
-                      className="absolute inset-0 w-full h-full"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      referrerPolicy="strict-origin-when-cross-origin"
-                      allowFullScreen
-                    />
-                  </div>
+                  {videoEmbed.provider === 'instagram' ? (
+                    <div className="w-full rounded-2xl bg-white ring-1 ring-slate-200 px-2 sm:px-4 py-4">
+                      <blockquote
+                        className="instagram-media"
+                        data-instgrm-permalink={`${videoEmbed.permalink}?utm_source=ig_embed&utm_campaign=loading`}
+                        data-instgrm-version="14"
+                        style={{ width: '100%', maxWidth: 540, margin: '0 auto' }}
+                      >
+                        <a href={videoEmbed.permalink} target="_blank" rel="noopener noreferrer">
+                          Instagram içeriğini görüntüle
+                        </a>
+                      </blockquote>
+                      <script async src="https://www.instagram.com/embed.js" />
+                      <script
+                        dangerouslySetInnerHTML={{
+                          __html: "window.instgrm && window.instgrm.Embeds && window.instgrm.Embeds.process && window.instgrm.Embeds.process();",
+                        }}
+                      />
+                    </div>
+                  ) : videoEmbed.provider === 'facebook' ? (
+                    <div className="w-full rounded-2xl bg-black ring-1 ring-slate-200 overflow-hidden">
+                      <iframe
+                        src={videoEmbed.src}
+                        title={`${blog.title} facebook`}
+                        className="w-full h-[300px] sm:h-[360px]"
+                        style={{ border: 0 }}
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                  ) : (
+                    <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black ring-1 ring-slate-200">
+                      <iframe
+                        src={videoEmbed.src}
+                        title={`${blog.title} video`}
+                        className="absolute inset-0 w-full h-full"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        allowFullScreen
+                      />
+                    </div>
+                  )}
                 </div>
               )}
 

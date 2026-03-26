@@ -22,7 +22,7 @@ export default function GizlilikPage() {
 
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-2">1. Toplanan Veriler</h2>
           <ul className="list-disc pl-6 space-y-1">
-            <li><strong>Check-in verileri:</strong> Seçtiğiniz il, ilçe (konum), mesaj metni, yüklediğiniz fotoğraflar.</li>
+            <li><strong>Kayıt verileri:</strong> Seçtiğiniz il, ilçe (konum), mesaj metni, yüklediğiniz fotoğraflar.</li>
             <li><strong>Teknik veriler:</strong> Gönderim tarihi, cihaz ve tarayıcı bilgileri, gerekirse IP adresi (güvenlik / log amaçlı).</li>
             <li><strong>İletişim verileri:</strong> E-posta bülteni aboneliği gibi durumlarda e-posta adresi.</li>
           </ul>

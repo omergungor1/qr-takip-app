@@ -10,7 +10,7 @@ export default function WantedBooksSection({ wantedBooks }) {
           Aranıyor: Gezgin Kitaplar
         </h2>
         <p className="text-[var(--text-light)] text-center mb-8 max-w-2xl mx-auto">
-          Bu kitaplardan 14 gündür check-in alınamıyor. Bulan ilk kişi sürpriz ödül kazanabilir.
+          Bu kitaplardan 14 gündür kayıt alınmadı. Bulan ilk kişi sürpriz ödül kazanabilir.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           {wantedBooks.map((pkg) => (

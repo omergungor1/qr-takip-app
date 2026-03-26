@@ -2,7 +2,7 @@ export default function StatsSection({ stats }) {
   const s = stats || {}
   const items = [
     { label: 'Toplam Kitap', value: s.totalPackages ?? 0, suffix: '' },
-    { label: 'Toplam Check-in', value: s.totalScans ?? 0, suffix: '' },
+    { label: 'Toplam Kayıt', value: s.totalScans ?? 0, suffix: '' },
     { label: 'Gezilen Şehir', value: s.citiesVisited ?? 0, suffix: '' },
     { label: 'Toplam KM', value: s.totalKm ?? 0, suffix: ' km' },
   ]

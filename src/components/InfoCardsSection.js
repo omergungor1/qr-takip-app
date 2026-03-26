@@ -116,12 +116,27 @@ export default function InfoCardsSection() {
   return (
     <section className="py-12 sm:py-16 bg-[var(--background)]">
       <div className="container mx-auto px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[var(--foreground)] mb-2">
-          Gezgin Kitap Rehberi
-        </h2>
-        <p className="text-[var(--text-light)] text-center mb-8 max-w-xl mx-auto text-sm sm:text-base">
-          Merak ettikleriniz için aşağıdaki kutulara tıklayın.
-        </p>
+        <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center mb-8">
+          <aside className="order-2 lg:order-1 w-full max-w-xl mx-auto lg:max-w-none rounded-xl border-2 border-dashed border-[var(--foreground)]/15 bg-[var(--background)]/70 px-4 py-3 text-center">
+            <span className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-light)]/80">Reklam alanı</span>
+            <span className="block text-xs sm:text-sm text-[var(--text-light)] mt-1">Sol banner (728x90 / 320x100)</span>
+          </aside>
+
+          <div className="order-1 lg:order-2 text-center px-1 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-2">
+              Gezgin Kitap Rehberi
+            </h2>
+            <p className="text-[var(--text-light)] max-w-xl mx-auto text-sm sm:text-base">
+              Merak edilen gezgin kitap rehber yazıları aşağıda...
+            </p>
+          </div>
+
+          <aside className="order-3 w-full max-w-xl mx-auto lg:max-w-none rounded-xl border-2 border-dashed border-[var(--foreground)]/15 bg-[var(--background)]/70 px-4 py-3 text-center">
+            <span className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-light)]/80">Reklam alanı</span>
+            <span className="block text-xs sm:text-sm text-[var(--text-light)] mt-1">Sağ banner (728x90 / 320x100)</span>
+          </aside>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {INFO_ITEMS.map((item) => (
             <button

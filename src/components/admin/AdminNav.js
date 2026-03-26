@@ -27,7 +27,7 @@ export default function AdminNav({ user }) {
     { href: '/admin', label: 'Panel' },
     { href: '/admin/packages', label: 'Kitaplar' },
     { href: '/admin/news', label: 'Haberler' },
-    { href: '/admin/blogs', label: 'Bloglar' },
+    { href: '/admin/blogs', label: 'Gezgin Haberleri' },
     { href: '/admin/explore', label: 'Keşfet' },
     { href: '/admin/subscribers', label: 'Aboneler' },
     { href: '/admin/settings', label: 'Ayarlar' },
@@ -61,8 +61,8 @@ export default function AdminNav({ user }) {
                 key={href}
                 href={href}
                 className={`px-3 py-2 rounded-lg text-sm transition-colors ${isActive(href)
-                    ? 'bg-[var(--primary)]/10 text-[var(--primary)] font-medium'
-                    : 'text-slate-600 hover:text-[var(--primary)] hover:bg-[var(--primary)]/5'
+                  ? 'bg-[var(--primary)]/10 text-[var(--primary)] font-medium'
+                  : 'text-slate-600 hover:text-[var(--primary)] hover:bg-[var(--primary)]/5'
                   }`}
               >
                 {label}
@@ -110,8 +110,8 @@ export default function AdminNav({ user }) {
                   href={href}
                   onClick={() => setMenuOpen(false)}
                   className={`px-3 py-2.5 rounded-lg font-medium ${isActive(href)
-                      ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
-                      : 'text-slate-700 hover:bg-[var(--primary)]/5 hover:text-[var(--primary)]'
+                    ? 'bg-[var(--primary)]/10 text-[var(--primary)]'
+                    : 'text-slate-700 hover:bg-[var(--primary)]/5 hover:text-[var(--primary)]'
                     }`}
                 >
                   {label}

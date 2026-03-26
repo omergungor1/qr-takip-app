@@ -11,7 +11,7 @@ export default async function AdminBlogsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-800 mb-6">Blog Yönetimi</h1>
+      <h1 className="text-2xl font-bold text-slate-800 mb-6">Gezgin Haber Yönetimi</h1>
       <AdminBlogsClient blogs={blogs || []} />
     </div>
   )

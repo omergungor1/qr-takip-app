@@ -156,12 +156,12 @@ export default function AdminExploreForm({ initialItem }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Video URL (YouTube)</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1">Video URL (YouTube / Vimeo / Instagram / Facebook)</label>
         <input
           type="url"
           value={videoUrl}
           onChange={(e) => setVideoUrl(e.target.value)}
-          placeholder="https://www.youtube.com/watch?v=..."
+          placeholder="https://www.youtube.com/watch?v=... veya https://www.instagram.com/p/..."
           className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white"
         />
       </div>
@@ -191,12 +191,12 @@ export default function AdminExploreForm({ initialItem }) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Kapak görseli (max 2MB)</label>
+        <label className="block text-sm font-medium text-slate-700 mb-1">Manşet Fotoğrafı (max 2MB)</label>
         {existingCoverUrl && !imageFile && (
           <div className="mb-3 rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-xs text-slate-600 mb-2">Mevcut kapak görseli</p>
+            <p className="text-xs text-slate-600 mb-2">Mevcut manşet fotoğrafı</p>
             <div className="relative w-full max-w-sm aspect-[16/10] rounded-lg overflow-hidden bg-white border border-slate-200">
-              <img src={existingCoverUrl} alt="Mevcut kapak görseli" className="w-full h-full object-cover" />
+              <img src={existingCoverUrl} alt="Mevcut manşet fotoğrafı" className="w-full h-full object-cover" />
             </div>
           </div>
         )}

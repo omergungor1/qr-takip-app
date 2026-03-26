@@ -7,7 +7,7 @@ export async function generateMetadata({ params }) {
   const { code } = await params
   return {
     title: `${code} Nolu Gezgin Kitap Yolculuğu`,
-    description: `GezginKitap - ${code} nolu kitabın Türkiye yolculuğu, check-in geçmişi ve rota haritası.`,
+    description: `GezginKitap - ${code} nolu kitabın Türkiye yolculuğu, kayıt geçmişi ve rota haritası.`,
   }
 }
 

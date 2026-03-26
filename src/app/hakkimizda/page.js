@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Proje Hakkında | GezginKitap',
-  description: 'GezginKitap projesi: Kitaplar Türkiye\'yi geziyor. Bir kitabı bul, check-in yap ve başka bir şehre bırak.',
+  description: 'GezginKitap projesi: Kitaplar Türkiye\'yi geziyor. Bir kitabı bul, kayıt yap ve başka bir şehre bırak.',
 }
 
 export default function HakkimizdaPage() {
@@ -24,11 +24,11 @@ export default function HakkimizdaPage() {
             kodu okutup konumunuzu, bir mesajınızı ve isteğe bağlı bir fotoğrafınızı ekleyebilirsiniz.
           </p>
           <p className="leading-relaxed">
-            <strong>QR kod okutunca ne olur?</strong> Kitabın check-in sayfası açılır; bulduğunuz il/ilçeyi seçip paylaşımınızı
+            <strong>QR kod okutunca ne olur?</strong> Kitabın kayıt sayfası açılır; bulduğunuz il/ilçeyi seçip paylaşımınızı
             gönderirsiniz. Böylece kitabın yolculuk hikayesine siz de katkıda bulunursunuz.
           </p>
           <p className="leading-relaxed">
-            Bu platform, kullanıcıların check-in yaparak içerik ürettiği, kitapların Türkiye içindeki yolculuğunu
+            Bu platform, kullanıcıların kayıt yaparak içerik ürettiği, kitapların Türkiye içindeki yolculuğunu
             harita üzerinde gösteren bir hikaye platformudur.
           </p>
         </div>

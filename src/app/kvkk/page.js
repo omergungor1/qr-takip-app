@@ -16,7 +16,7 @@ export default function KvkkPage() {
         <div className="prose prose-slate max-w-none space-y-6 text-[var(--foreground)] text-[15px] leading-relaxed">
           <p>
             <strong>GezginKitap</strong> olarak 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında,
-            check-in ve paylaşım sırasında toplanan kişisel verilerinize ilişkin aydınlatma yükümlülüğümüzü aşağıda yerine getirmekteyiz.
+            kayıt ve paylaşım sırasında toplanan kişisel verilerinize ilişkin aydınlatma yükümlülüğümüzü aşağıda yerine getirmekteyiz.
           </p>
 
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-2">1. Veri Sorumlusu</h2>
@@ -26,7 +26,7 @@ export default function KvkkPage() {
 
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-2">2. İşlenen Kişisel Veriler</h2>
           <p>
-            Check-in formu aracılığıyla paylaştığınız <strong>il / ilçe (konum bilgisi)</strong>, <strong>mesaj metni</strong>,
+            Kayıt formu aracılığıyla paylaştığınız <strong>il / ilçe (konum bilgisi)</strong>, <strong>mesaj metni</strong>,
             <strong> yüklediğiniz fotoğraflar</strong> ve form gönderimine ilişkin teknik veriler (tarih, IP vb.) işlenmektedir.
             İsim veya rumuz paylaşıyorsanız bu bilgiler de kişisel veri kapsamındadır.
           </p>
@@ -39,12 +39,12 @@ export default function KvkkPage() {
           </p>
           <p>
             <strong>Paylaştığınız fotoğraf, isim ve mesajlar KVKK yönetmeliği çerçevesinde web sitemizde ve
-              gezgin kitapla ilgili tüm mecralarda yayınlanabilir.</strong> Check-in göndererek bu kullanımı kabul etmiş sayılırsınız.
+              gezgin kitapla ilgili tüm mecralarda yayınlanabilir.</strong> Kayıt yaparak bu kullanımı kabul etmiş sayılırsınız.
           </p>
 
           <h2 className="text-xl font-semibold text-slate-800 mt-8 mb-2">4. Hukuki Sebep</h2>
           <p>
-            Verileriniz, açık rızanız (check-in formundaki onay kutuları) ve KVKK’nın 5. maddesinde sayılan
+            Verileriniz, açık rızanız (Kayıt formundaki onay kutuları) ve KVKK’nın 5. maddesinde sayılan
             meşru menfaat (proje tanıtımı, kitap yolculuğu hikayesi) kapsamında işlenmektedir.
           </p>
 

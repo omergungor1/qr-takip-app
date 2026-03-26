@@ -43,12 +43,27 @@ export default function TurizmKategoriButtons() {
   return (
     <section className="py-8 sm:py-10 bg-[var(--background)] border-t border-slate-100" aria-labelledby="turizm-kategori-baslik">
       <div className="container mx-auto px-4">
-        <h2 id="turizm-kategori-baslik" className="text-xl sm:text-2xl font-bold text-center text-[var(--foreground)] mb-2" style={{ fontFamily: 'var(--font-heading), ui-sans-serif, system-ui, sans-serif' }}>
-          Türkiye&apos;yi Keşfet
-        </h2>
-        <p className="text-[var(--text-light)] text-center text-sm sm:text-base mb-6 max-w-lg mx-auto">
-          Kültür, turizm ve gastronomi rehberi
-        </p>
+        <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center mb-6">
+          <aside className="order-2 lg:order-1 w-full max-w-xl mx-auto lg:max-w-none rounded-xl border-2 border-dashed border-[var(--foreground)]/15 bg-[var(--background)]/70 px-4 py-3 text-center">
+            <span className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-light)]/80">Reklam alanı</span>
+            <span className="block text-xs sm:text-sm text-[var(--text-light)] mt-1">Sol banner (728x90 / 320x100)</span>
+          </aside>
+
+          <div className="order-1 lg:order-2 text-center px-1 sm:px-4">
+            <h2 id="turizm-kategori-baslik" className="text-xl sm:text-2xl font-bold text-[var(--foreground)] mb-2" style={{ fontFamily: 'var(--font-heading), ui-sans-serif, system-ui, sans-serif' }}>
+              Türkiye&apos;yi Keşfet
+            </h2>
+            <p className="text-[var(--text-light)] text-sm sm:text-base max-w-lg mx-auto">
+              Kültür, turizm ve gastronomi rehberi
+            </p>
+          </div>
+
+          <aside className="order-3 w-full max-w-xl mx-auto lg:max-w-none rounded-xl border-2 border-dashed border-[var(--foreground)]/15 bg-[var(--background)]/70 px-4 py-3 text-center">
+            <span className="block text-[11px] font-semibold uppercase tracking-wider text-[var(--text-light)]/80">Reklam alanı</span>
+            <span className="block text-xs sm:text-sm text-[var(--text-light)] mt-1">Sağ banner (728x90 / 320x100)</span>
+          </aside>
+        </div>
+
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
           {CATEGORIES.map((item) => {
             const content = (

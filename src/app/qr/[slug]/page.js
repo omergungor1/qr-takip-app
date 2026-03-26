@@ -7,7 +7,7 @@ export async function generateMetadata({ params }) {
   const supabase = await createClient()
   const { data } = await supabase.from('packages').select('title, code').eq('qr_slug', slug).eq('is_active', true).single()
   const title = data?.title || data?.code || 'Kitap'
-  return { title: `${title} Check-in | GezginKitap` }
+  return { title: `${title} Kayıt | GezginKitap` }
 }
 
 async function getPackage(slug) {

@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "GezginKitap",
-  description: "Kitaplar Türkiye'yi geziyor. Bir kitabı bul, check-in yap ve başka bir şehre bırak. Türkiye'nin en ilginç kitap yolculuğunu birlikte yazıyoruz.",
+  description: "Kitaplar Türkiye'yi geziyor. Bir kitabı bul, kayıt yap ve başka bir şehre bırak. Türkiye'nin en ilginç kitap yolculuğunu birlikte yazıyoruz.",
 };
 
 export default function RootLayout({ children }) {

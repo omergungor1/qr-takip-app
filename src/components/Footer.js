@@ -8,8 +8,8 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold text-white mb-3">GezginKitap Projesi</h3>
             <p className="text-sm">
-              Kitaplar Türkiye'yi geziyor. Bir kitabı bul, check-in yap ve başka bir şehre bırak.
-              Mesaj ve fotoğraflarla hikayeye katılın.
+              Bir kitabı bul, Qr kodunu okut ve başka bir şehre götür bırak. Türkiye&apos;nin en ilginç kitap
+              yolculuğunu birlikte yazıyoruz.
             </p>
           </div>
           <div>

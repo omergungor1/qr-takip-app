@@ -86,7 +86,7 @@ export default function KesfetHubPage() {
             Türkiye’yi Keşfet
           </h1>
           <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Beş kategori altında toplanan yazılarla rotanızı zenginleştirin. İçerikler admin panelinden yönetilir ve yayınlanan yazılar kategori sayfalarında otomatik listelenir.
+            Beş kategori altında toplanan yazılarla rotanızı zenginleştirin.
           </p>
         </header>
 

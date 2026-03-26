@@ -135,24 +135,22 @@ export default function AdminCheckinsClient() {
         <button
           type="button"
           onClick={() => setTab('pending')}
-          className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${
-            tab === 'pending'
+          className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${tab === 'pending'
               ? 'bg-[var(--primary)] text-white border-[var(--primary)]'
               : 'bg-white text-slate-700 border-slate-200 hover:border-[var(--primary)]/60'
-          }`}
+            }`}
         >
-          Bekleyen Check-inler
+          Bekleyen Kayıtlar
         </button>
         <button
           type="button"
           onClick={() => setTab('all')}
-          className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${
-            tab === 'all'
+          className={`px-4 py-2 rounded-xl text-sm font-semibold border transition-colors ${tab === 'all'
               ? 'bg-[var(--primary)] text-white border-[var(--primary)]'
               : 'bg-white text-slate-700 border-slate-200 hover:border-[var(--primary)]/60'
-          }`}
+            }`}
         >
-          Tüm Check-inler
+          Tüm Kayıtlar
         </button>
       </div>
 
@@ -237,15 +235,14 @@ export default function AdminCheckinsClient() {
                       <td className="px-4 py-3 text-slate-600 whitespace-nowrap">{formatTrDate(row.created_at)}</td>
                       <td className="px-4 py-3 whitespace-nowrap">
                         <span
-                          className={`inline-flex items-center px-2 py-1 rounded-lg text-xs font-semibold ${
-                            row.status === 'approved'
+                          className={`inline-flex items-center px-2 py-1 rounded-lg text-xs font-semibold ${row.status === 'approved'
                               ? 'bg-green-50 text-green-800'
                               : row.status === 'pending'
-                              ? 'bg-amber-50 text-amber-800'
-                              : row.status === 'rejected'
-                              ? 'bg-red-50 text-red-800'
-                              : 'bg-slate-100 text-slate-700'
-                          }`}
+                                ? 'bg-amber-50 text-amber-800'
+                                : row.status === 'rejected'
+                                  ? 'bg-red-50 text-red-800'
+                                  : 'bg-slate-100 text-slate-700'
+                            }`}
                         >
                           {statusLabel(row.status)}
                         </span>
