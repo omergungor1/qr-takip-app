@@ -105,7 +105,7 @@ export default function EmailSubscription() {
             disabled={status === 'loading'}
             className="rounded-xl bg-[var(--primary)] text-white font-semibold px-6 py-3 shadow-sm hover:opacity-90 transition-opacity disabled:opacity-50 min-h-[44px]"
           >
-            {status === 'loading' ? 'Gönderiliyor...' : 'Abone Ol'}
+            {status === 'loading' ? 'Gönderiliyor...' : 'Ücretsiz Abone Ol'}
           </button>
         </form>
         {message && (

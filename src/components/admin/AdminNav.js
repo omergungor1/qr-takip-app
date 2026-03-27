@@ -30,6 +30,7 @@ export default function AdminNav({ user }) {
     { href: '/admin/blogs', label: 'Gezgin Haberleri' },
     { href: '/admin/explore', label: 'Keşfet' },
     { href: '/admin/subscribers', label: 'Aboneler' },
+    { href: '/admin/ad-requests', label: 'Reklam talepleri' },
     { href: '/admin/settings', label: 'Ayarlar' },
     { href: '/admin/images', label: 'Görseller' },
   ]

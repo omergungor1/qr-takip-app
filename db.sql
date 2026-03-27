@@ -187,6 +187,36 @@ create table explore_contents (
 );
 
 
+
+create table ad_requests (
+    id uuid primary key default gen_random_uuid(),
+
+    company_name text not null,
+    contact_person text not null,
+    phone_number text not null,
+    address text,
+
+    created_at timestamptz not null default now()
+);
+
+-- Reklam talepleri: herkese açık form yalnızca insert; okuma yönetici (authenticated).
+alter table ad_requests enable row level security;
+
+create policy "ad_requests_anon_insert"
+on ad_requests
+for insert
+to anon
+with check (true);
+
+create policy "ad_requests_authenticated_select"
+on ad_requests
+for select
+to authenticated
+using (true);
+
+-- Mevcut veritabanı için (tablo zaten varsa): yukarıdaki alter + policy komutlarını ayrı migration olarak çalıştırın.
+
+
 create index idx_explore_status on explore_contents(status);
 
 create index idx_explore_category on explore_contents(category);

@@ -16,19 +16,6 @@ const VIEW_MOBILE = { longitude: 35, latitude: 39, zoom: 4.25 }
 const VIEW_DESKTOP = { longitude: 32.85, latitude: 39.1, zoom: 5.2 }
 const MOBILE_MQ = '(max-width: 639px)'
 
-/** Harita yanı kayan panel için mesajlar */
-const MOCK_MESSAGES = [
-  { date: '17 Mart 2025', message: 'Merhaba ben Muharrem Köse, Mersinden selamlar' },
-  { date: '16 Mart 2025', message: 'Merhaba ben Mesut Pekcan. İsviçreden selamlar' },
-  { date: '15 Mart 2025', message: 'Merhaba ben Murat Ertaş. Erzurumdan herkese merhaba' },
-  { date: '14 Mart 2025', message: 'Erkan Akçam Bursa\'dan merhaba' },
-  { date: '13 Mart 2025', message: 'Merhaba ben Elvan Şimşek. Çorumdan tüm gezgin kitap sevenlere merhaba diyorum' },
-  { date: '12 Mart 2025', message: 'Ben Merve Şanlı, kitabı yeni tiyatro önüne bırakıyorum' },
-  { date: '11 Mart 2025', message: 'Merhaba ben Ankara\'dan Nizamettin Bilici, herkese selamlar' },
-  { date: '10 Mart 2025', message: 'Merhaba ben İpek Yiğit, Eskişehirden selamlar' },
-  { date: '9 Mart 2025', message: 'Merhaba ben Müjge karaca, Ardahan\'dan herkese merhaba' },
-]
-
 /** Her kitap için farklı renk – minimal, ayırt edilebilir palet */
 const ROUTE_PALETTE = [
   '#E85D04', // turuncu
@@ -88,7 +75,7 @@ function getAllRoutesGeoJSON(packages) {
   return { type: 'FeatureCollection', features }
 }
 
-export default function MapSection({ packages }) {
+export default function MapSection({ packages, recentScanMessages = [] }) {
   const mapRef = useRef(null)
   const mapInstanceRef = useRef(null)
   const mapContainerRef = useRef(null)
@@ -270,23 +257,32 @@ export default function MapSection({ packages }) {
     return { totalCheckins, cities, km, lastCity }
   }
 
+  const tickerItems =
+    recentScanMessages.length > 0
+      ? recentScanMessages
+      : [{ id: 'placeholder', date: '', message: 'Henüz onaylı okur mesajı yok.' }]
+
   const messageList = (
     <>
-      {MOCK_MESSAGES.map((item, i) => (
+      {tickerItems.map((item) => (
         <div
-          key={`a-${i}`}
+          key={`a-${item.id}`}
           className="flex flex-col gap-1 p-3 rounded-xl bg-white/90 backdrop-blur border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
         >
-          <span className="text-xs font-medium text-[var(--primary)]">{item.date}</span>
+          {item.date ? (
+            <span className="text-xs font-medium text-[var(--primary)]">{item.date}</span>
+          ) : null}
           <p className="text-sm text-[var(--foreground)] leading-snug">{item.message}</p>
         </div>
       ))}
-      {MOCK_MESSAGES.map((item, i) => (
+      {tickerItems.map((item) => (
         <div
-          key={`b-${i}`}
+          key={`b-${item.id}`}
           className="flex flex-col gap-1 p-3 rounded-xl bg-white/90 backdrop-blur border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
         >
-          <span className="text-xs font-medium text-[var(--primary)]">{item.date}</span>
+          {item.date ? (
+            <span className="text-xs font-medium text-[var(--primary)]">{item.date}</span>
+          ) : null}
           <p className="text-sm text-[var(--foreground)] leading-snug">{item.message}</p>
         </div>
       ))}

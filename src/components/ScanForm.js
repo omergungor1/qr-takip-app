@@ -105,7 +105,7 @@ export default function ScanForm({ package: pkg, scans }) {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href={pkg?.code ? `/book/${pkg.code}` : '/harita'}
+              href={pkg?.code ? `/book/${pkg.code}` : '/'}
               className="inline-flex items-center justify-center rounded-xl bg-[var(--primary)] text-white font-medium py-3 px-6 shadow-sm hover:opacity-90"
             >
               Kitabın Yolculuğunu Gör

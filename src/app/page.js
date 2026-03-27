@@ -2,7 +2,6 @@ import { createClient } from '@/lib/supabase-server'
 import StatsSection from '@/components/StatsSection'
 import TurizmKategoriButtons from '@/components/TurizmKategoriButtons'
 import InfoCardsSection from '@/components/InfoCardsSection'
-import GallerySection from '@/components/GallerySection'
 import BlogCard from '@/components/BlogCard'
 import NewsCard from '@/components/NewsCard'
 import HomeClient from '@/components/HomeClient'
@@ -29,7 +28,16 @@ async function getData() {
   const news = (newsRes.data || []).map((n) => ({ ...n, cover_image: n.cover_image ? getStorageUrl(n.cover_image) : getStorageUrl(`news/${n.id}.jpg`) }))
   const blogs = (blogsRes.data || []).map((b) => ({ ...b, cover_image: b.cover_image ? getStorageUrl(b.cover_image) : getStorageUrl(`blogs/${b.id}.jpg`) }))
   const allScans = scansRes.data || []
-  const scans = allScans.slice(0, 50).map((s) => ({ ...s, image_path: s.image_path ? getStorageUrl(s.image_path) : null }))
+
+  const recentScanMessages = allScans.slice(0, 20).map((s) => ({
+    id: s.id,
+    date: new Date(s.created_at).toLocaleDateString('tr-TR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }),
+    message: s.message && String(s.message).trim() ? String(s.message).trim() : 'Mesaj eklenmemiş.',
+  }))
 
   const cities = new Set(allScans.map((s) => s.province).filter(Boolean))
   const totalKm = totalKmFromScans(allScans)
@@ -61,14 +69,14 @@ async function getData() {
     packages: packagesWithScans,
     news,
     blogs,
-    scans,
     stats,
     wantedBooks,
+    recentScanMessages,
   }
 }
 
 export default async function Home() {
-  const { packages, news, blogs, scans, stats, wantedBooks } = await getData()
+  const { packages, news, blogs, stats, wantedBooks, recentScanMessages } = await getData()
 
   return (
     <>
@@ -82,33 +90,13 @@ export default async function Home() {
             <p className="text-[var(--text-light)] text-center mb-6 max-w-2xl mx-auto">
               Haritada kitapların son konumlarını ve gezindiği rotayı görün. Bir kitaba tıklayarak pasaport sayfasına gidebilirsiniz.
             </p>
-            <HomeClient
-              packages={packages}
-              news={news}
-              blogs={blogs}
-              scans={scans}
-              stats={stats}
-            />
+            <HomeClient packages={packages} recentScanMessages={recentScanMessages} />
           </div>
         </section>
         <TurizmKategoriButtons />
 
-        <GallerySection scans={scans} />
         <WantedBooksSection wantedBooks={wantedBooks} />
 
-        <section className="py-12 sm:py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Gezgin Haberleri</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {blogs.map((blog) => (
-                <BlogCard key={blog.id} blog={blog} />
-              ))}
-            </div>
-            {blogs.length === 0 && (
-              <p className="text-slate-500 text-center py-8">Henüz blog yazısı yok.</p>
-            )}
-          </div>
-        </section>
 
         <section className="py-12 sm:py-16 bg-[var(--background)]">
           <div className="container mx-auto px-4">
@@ -128,6 +116,20 @@ export default async function Home() {
         <StatsSection stats={stats} />
         <InfoCardsSection />
 
+
+        <section className="py-12 sm:py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Gezgin Haberleri</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {blogs.map((blog) => (
+                <BlogCard key={blog.id} blog={blog} />
+              ))}
+            </div>
+            {blogs.length === 0 && (
+              <p className="text-slate-500 text-center py-8">Henüz blog yazısı yok.</p>
+            )}
+          </div>
+        </section>
 
       </section>
     </>

@@ -6,8 +6,7 @@ import Image from 'next/image'
 
 const navLinks = [
   { href: '/', label: 'Ana Sayfa' },
-  { href: '/harita', label: 'Harita' },
-  { href: '/kesfet', label: 'Keşfet' },
+  { href: '/yol-arkadaslarim', label: 'Yol Arkadaşlarım' },
   { href: '/blog', label: 'Blog' },
   { href: '/haber', label: 'Haberler' },
   { href: '/hakkimizda', label: 'Proje Hakkında' },
@@ -17,6 +16,12 @@ const externalLinks = [
   { href: 'https://www.turizmatlasitv.com/', label: 'Turizm Atlası', description: "Türkiye'nin kültür ve turizm haberleri burada" },
   { href: 'https://www.gastronomiatlasi.com/', label: 'Gastronomi Atlası', description: "Türkiye'nin mekan ve otelleri" },
 ]
+
+const gezginYazilariCard = {
+  href: '/gezgin-yazilari',
+  label: 'Gezgin Yazıları',
+  description: 'Yolculuk ve okuma üzerine yazılar',
+}
 
 const linkClass = 'block px-4 py-3 text-sm font-medium text-[var(--foreground)] hover:text-[var(--primary)] hover:bg-[#FF6B3D]/10 rounded-xl transition-colors'
 
@@ -57,6 +62,13 @@ export default function SiteHeader() {
                   <span className="text-xs text-slate-500 leading-tight mt-0.5 line-clamp-2">{description}</span>
                 </a>
               ))}
+              <Link
+                href={gezginYazilariCard.href}
+                className="flex flex-col justify-center text-left px-3 py-2 rounded-xl border border-slate-200 hover:border-[var(--primary)]/40 hover:bg-[var(--primary)]/5 transition-colors min-w-0 max-w-[200px] sm:max-w-[220px]"
+              >
+                <span className="font-semibold text-[var(--foreground)] text-sm leading-tight">{gezginYazilariCard.label}</span>
+                <span className="text-xs text-slate-500 leading-tight mt-0.5 line-clamp-2">{gezginYazilariCard.description}</span>
+              </Link>
             </div>
           </div>
 
@@ -67,12 +79,6 @@ export default function SiteHeader() {
                 {label}
               </Link>
             ))}
-            <Link
-              href="/harita"
-              className="ml-2 rounded-xl bg-[var(--primary)] text-white text-sm font-semibold px-4 py-2.5 shadow-sm hover:opacity-90 transition-opacity"
-            >
-              Kitap Bul
-            </Link>
           </nav>
 
           {/* Mobil: hamburger butonu */}
@@ -101,13 +107,15 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobil: açılır menü */}
+      {/* Mobil: açılır menü — max-height + overflow-y-auto ile tüm linkler görünür, gerekirse kaydırılır */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-200 ease-out ${
-          menuOpen ? 'max-h-[320px] opacity-100' : 'max-h-0 opacity-0'
+        className={`md:hidden transition-all duration-200 ease-out ${
+          menuOpen
+            ? 'max-h-[min(88vh,720px)] overflow-y-auto opacity-100'
+            : 'max-h-0 overflow-hidden opacity-0'
         }`}
       >
-        <nav className="container mx-auto px-4 pb-4 pt-1 bg-white border-t border-slate-100">
+        <nav className="container mx-auto px-4 pb-6 pt-1 bg-white border-t border-slate-100">
           <div className="flex flex-col gap-1">
             {navLinks.map(({ href, label }) => (
               <Link
@@ -134,14 +142,15 @@ export default function SiteHeader() {
                   <span className="text-xs text-slate-500 mt-0.5 block">{description}</span>
                 </a>
               ))}
+              <Link
+                href={gezginYazilariCard.href}
+                className="block px-4 py-3 rounded-xl hover:bg-[#FF6B3D]/10 transition-colors text-left"
+                onClick={() => setMenuOpen(false)}
+              >
+                <span className="font-semibold text-[var(--foreground)] text-sm block">{gezginYazilariCard.label}</span>
+                <span className="text-xs text-slate-500 mt-0.5 block">{gezginYazilariCard.description}</span>
+              </Link>
             </div>
-            <Link
-              href="/harita"
-              className="block px-4 py-3 text-sm font-semibold rounded-xl bg-[var(--primary)] text-white text-center mt-2"
-              onClick={() => setMenuOpen(false)}
-            >
-              Kitap Bul
-            </Link>
           </div>
         </nav>
       </div>

@@ -11,12 +11,25 @@ export default function Footer() {
               Bir kitabı bul, Qr kodunu okut ve başka bir şehre götür bırak. Türkiye&apos;nin en ilginç kitap
               yolculuğunu birlikte yazıyoruz.
             </p>
+            <div className="flex flex-col sm:flex-row gap-2 mt-5">
+              <Link
+                href="/bagis"
+                className="inline-flex items-center justify-center rounded-lg bg-[var(--primary)] text-white text-sm font-semibold px-4 py-2.5 hover:opacity-95 transition-opacity text-center"
+              >
+                Bağış yap
+              </Link>
+              <Link
+                href="/reklam-ver"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-500 text-slate-200 text-sm font-semibold px-4 py-2.5 hover:bg-slate-700/80 transition-colors text-center"
+              >
+                Reklam ver
+              </Link>
+            </div>
           </div>
           <div>
             <h3 className="font-semibold text-white mb-3">Bağlantılar</h3>
             <ul className="space-y-2 text-sm">
               <li><Link href="/" className="hover:text-[var(--secondary)]">Ana Sayfa</Link></li>
-              <li><Link href="/harita" className="hover:text-[var(--secondary)]">Harita</Link></li>
               <li><Link href="/blog" className="hover:text-[var(--secondary)]">Blog</Link></li>
               <li><Link href="/haber" className="hover:text-[var(--secondary)]">Haberler</Link></li>
               <li><Link href="/hakkimizda" className="hover:text-[var(--secondary)]">Proje Hakkında</Link></li>
@@ -56,8 +69,21 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-slate-700 text-center text-sm text-slate-500">
-          © {new Date().getFullYear()} GezginKitap. Tüm hakları saklıdır.
+        <div className="mt-8 pt-8 border-t border-slate-700 space-y-6">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 mb-2 text-center">
+              Yasal uyarı
+            </p>
+            <p className="text-xs text-slate-500 leading-relaxed text-center">
+              Gezgin Kitap projesi fikri ve sınai mülkiyet hakları kapsamında korunan bir projedir.
+              Sitemizde yer alan yazılar, kısmen veya tamamen izinsiz kopyalanamaz ve çoğaltılamaz.
+              Sayfalarımızdaki içerikler, görseller ve videolar izinsiz kullanılamaz; izin alınmadan kısmi
+              alıntı da yapılamaz.
+            </p>
+          </div>
+          <p className="text-center text-sm text-slate-500">
+            © {new Date().getFullYear()} GezginKitap. Tüm hakları saklıdır.
+          </p>
         </div>
       </div>
     </footer>

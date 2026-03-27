@@ -3,11 +3,13 @@
 import MapSection from './MapSection'
 import PackageTicker from './PackageTicker'
 
-export default function HomeClient({ packages, news, blogs, scans, stats }) {
+export default function HomeClient({ packages, recentScanMessages }) {
   return (
     <>
-      <MapSection packages={packages} />
       <PackageTicker packages={packages} />
+      <div className="mt-6">
+        <MapSection packages={packages} recentScanMessages={recentScanMessages} />
+      </div>
     </>
   )
 }

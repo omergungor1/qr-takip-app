@@ -41,7 +41,7 @@ const CATEGORIES = TURIZM_CATEGORIES.map((c) => ({
 
 export default function TurizmKategoriButtons() {
   return (
-    <section className="py-8 sm:py-10 bg-[var(--background)] border-t border-slate-100" aria-labelledby="turizm-kategori-baslik">
+    <section className="pt-2 sm:pt-3 pb-6 sm:pb-8 bg-[var(--background)] border-t border-slate-100" aria-labelledby="turizm-kategori-baslik">
       <div className="container mx-auto px-4">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center mb-6">
           <aside className="order-2 lg:order-1 w-full max-w-xl mx-auto lg:max-w-none rounded-xl border-2 border-dashed border-[var(--foreground)]/15 bg-[var(--background)]/70 px-4 py-3 text-center">

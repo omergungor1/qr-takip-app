@@ -1,6 +1,7 @@
 import { Poppins, Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteLayoutWrapper from "@/components/SiteLayoutWrapper";
+import SiteContentProtection from "@/components/SiteContentProtection";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${poppins.variable} ${inter.variable} ${geistMono.variable} antialiased`}
       >
+        <SiteContentProtection />
         <SiteLayoutWrapper>{children}</SiteLayoutWrapper>
       </body>
     </html>

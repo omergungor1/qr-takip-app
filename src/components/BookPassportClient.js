@@ -251,10 +251,10 @@ export default function BookPassportClient({ pkg }) {
 
       <footer className="p-4 sm:p-6 border-t border-slate-100 bg-slate-50">
         <Link
-          href="/harita"
+          href="/"
           className="inline-flex rounded-xl border-2 border-[var(--primary)] text-[var(--primary)] font-semibold px-6 py-2.5 hover:bg-[var(--primary)]/10"
         >
-          Haritaya dön
+          Ana sayfaya dön
         </Link>
       </footer>
     </article>
