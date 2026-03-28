@@ -14,11 +14,16 @@ export default function SiteLayoutWrapper({ children }) {
     return <>{children}</>
   }
 
+  /* QR / kısa link kayıt sayfası: sade içerik, header ve footer yok */
+  if (isCheckInPage) {
+    return <>{children}</>
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <SiteHeader />
       <main className="flex-1">{children}</main>
-      {!isCheckInPage && <EmailSubscription />}
+      <EmailSubscription />
       <Footer />
     </div>
   )

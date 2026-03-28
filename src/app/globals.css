@@ -85,6 +85,19 @@ html.site-content-protected img {
   animation: package-bounce 0.6s ease-in-out infinite;
 }
 
+/* 404: maskot hafif sallanma */
+@keyframes mascot-shrug {
+  0%, 100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+}
+.animate-mascot-shrug {
+  animation: mascot-shrug 2.8s ease-in-out infinite;
+}
+
 /* Kayan haber bandı – sonsuz döngü */
 @keyframes ticker-scroll {
   0% {

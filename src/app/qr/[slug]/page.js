@@ -14,15 +14,12 @@ async function getPackage(slug) {
   const supabase = await createClient()
   const { data, error } = await supabase
     .from('packages')
-    .select('*, package_scans(*)')
+    .select('id, code, title, qr_slug')
     .eq('qr_slug', slug)
     .eq('is_active', true)
     .single()
   if (error || !data) return null
-  return {
-    ...data,
-    package_scans: (data.package_scans || []).filter((s) => s.status === 'approved'),
-  }
+  return data
 }
 
 export default async function QrCheckInPage({ params }) {
@@ -30,15 +27,5 @@ export default async function QrCheckInPage({ params }) {
   const pkg = await getPackage(slug)
   if (!pkg) notFound()
 
-  const scans = (pkg.package_scans || []).sort(
-    (a, b) => new Date(a.created_at) - new Date(b.created_at)
-  )
-
-  return (
-    <div className="bg-[var(--background)] min-h-screen">
-      <div className="container mx-auto px-4 py-8 max-w-lg">
-        <ScanForm package={pkg} scans={scans} />
-      </div>
-    </div>
-  )
+  return <ScanForm package={pkg} />
 }
