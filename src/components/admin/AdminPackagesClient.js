@@ -9,10 +9,8 @@ const QR_SIZE = 160
 export default function AdminPackagesClient({ packages: initialPackages, qrBaseUrl }) {
   const [packages, setPackages] = useState(initialPackages)
   const [showForm, setShowForm] = useState(false)
-  const [code, setCode] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [qrSlug, setQrSlug] = useState('')
   const [saving, setSaving] = useState(false)
   const [qrDataUrls, setQrDataUrls] = useState({})
   const generatedRef = useRef({})
@@ -54,29 +52,38 @@ export default function AdminPackagesClient({ packages: initialPackages, qrBaseU
     return () => { cancelled = true }
   }, [packages, baseUrl])
 
+  const resetNewBookForm = () => {
+    setTitle('')
+    setDescription('')
+    setShowForm(false)
+  }
+
   const handleAdd = async (e) => {
     e.preventDefault()
-    if (!code.trim() || !qrSlug.trim()) return
     setSaving(true)
-    const slug = qrSlug.trim().toLowerCase().replace(/\s+/g, '-')
-    const { data, error } = await supabase.from('packages').insert({
-      code: code.trim(),
-      title: title.trim() || null,
-      description: description.trim() || null,
-      qr_slug: slug,
-      is_active: true,
-    }).select().single()
+    const qrSlug =
+      typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2, 11)}`
+    const { data, error } = await supabase
+      .from('packages')
+      .insert({
+        title: title.trim() || null,
+        description: description.trim() || null,
+        qr_slug: qrSlug,
+        is_active: true,
+      })
+      .select()
+      .single()
     setSaving(false)
     if (error) {
       alert(error.message)
       return
     }
     setPackages((prev) => [data, ...prev])
-    setShowForm(false)
-    setCode('')
     setTitle('')
     setDescription('')
-    setQrSlug('')
+    setShowForm(false)
   }
 
   const toggleActive = async (pkg) => {
@@ -93,7 +100,10 @@ export default function AdminPackagesClient({ packages: initialPackages, qrBaseU
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => setShowForm((v) => !v)}
+          onClick={() => {
+            if (showForm) resetNewBookForm()
+            else setShowForm(true)
+          }}
           className="rounded-xl bg-amber-500 text-white px-4 py-2 font-medium"
         >
           {showForm ? 'İptal' : 'Yeni kitap'}
@@ -102,14 +112,9 @@ export default function AdminPackagesClient({ packages: initialPackages, qrBaseU
 
       {showForm && (
         <form onSubmit={handleAdd} className="bg-white rounded-xl p-6 shadow border border-slate-200 space-y-4 max-w-md">
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Kod</label>
-            <input value={code} onChange={(e) => setCode(e.target.value)} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white placeholder:text-slate-400" required />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">QR Slug (URL’de kullanılacak)</label>
-            <input value={qrSlug} onChange={(e) => setQrSlug(e.target.value)} placeholder="ornek-kitap" className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white placeholder:text-slate-400" required />
-          </div>
+          <p className="text-sm text-slate-500">
+            Kitap kodu ve QR bağlantısı kayıtta otomatik oluşturulur.
+          </p>
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Başlık</label>
             <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white placeholder:text-slate-400" />
@@ -118,9 +123,19 @@ export default function AdminPackagesClient({ packages: initialPackages, qrBaseU
             <label className="block text-sm font-medium text-slate-700 mb-1">Açıklama</label>
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={2} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white placeholder:text-slate-400" />
           </div>
-          <button type="submit" disabled={saving} className="rounded-xl bg-slate-800 text-white px-4 py-2 font-medium disabled:opacity-50">
-            {saving ? 'Kaydediliyor...' : 'Kaydet'}
-          </button>
+          <div className="flex flex-row gap-3 pt-1">
+            <button type="submit" disabled={saving} className="flex-1 rounded-xl bg-slate-800 text-white px-4 py-2.5 font-medium disabled:opacity-50">
+              {saving ? 'Kaydediliyor...' : 'Kaydet'}
+            </button>
+            <button
+              type="button"
+              onClick={resetNewBookForm}
+              disabled={saving}
+              className="flex-1 rounded-xl border border-slate-300 bg-white text-slate-700 px-4 py-2.5 font-medium hover:bg-slate-50 disabled:opacity-50"
+            >
+              İptal
+            </button>
+          </div>
         </form>
       )}
 
