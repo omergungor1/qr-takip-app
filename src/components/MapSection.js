@@ -293,7 +293,7 @@ export default function MapSection({ packages, recentScanMessages = [] }) {
     <div className="flex flex-col sm:flex-row gap-4 w-full min-w-0">
       <div
         ref={mapContainerRef}
-        className="relative w-full min-w-0 min-h-[400px] sm:min-h-[500px] h-[400px] sm:h-[500px] rounded-2xl overflow-hidden shadow-lg border border-slate-200 isolate"
+        className="relative w-full min-w-0 min-h-[220px] sm:min-h-[500px] h-[220px] sm:h-[500px] rounded-2xl overflow-hidden shadow-lg border border-slate-200 isolate"
       >
         <Map
           ref={mapRef}
@@ -304,7 +304,7 @@ export default function MapSection({ packages, recentScanMessages = [] }) {
             setSelectedStop(null)
           }}
           onLoad={handleMapLoad}
-          mapStyle="mapbox://styles/mapbox/light-v11"
+          mapStyle="mapbox://styles/mapbox/navigation-day-v1"
           mapboxAccessToken={MAPBOX_TOKEN}
           style={{ width: '100%', height: '100%' }}
         >
@@ -539,7 +539,7 @@ export default function MapSection({ packages, recentScanMessages = [] }) {
       </div>
       <aside className="w-full sm:w-72 h-[320px] sm:h-[500px] shrink-0 flex flex-col rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-[var(--background)]">
         <div className="px-4 py-3 border-b border-slate-200 bg-white/80 shrink-0">
-          <h3 className="text-sm font-semibold text-[var(--foreground)]">Okur mesajları</h3>
+          <h3 className="text-sm font-semibold text-[var(--foreground)]">Gezgin mesajları</h3>
         </div>
         <div className="flex-1 min-h-0 overflow-hidden relative">
           <div className="absolute top-0 left-0 right-0 w-full animate-ticker-vertical">

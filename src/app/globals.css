@@ -58,6 +58,7 @@ html.site-content-protected img {
 .news-content span {
   color: #1e293b;
 }
+
 .blog-content h1,
 .blog-content h2,
 .blog-content h3,
@@ -66,6 +67,7 @@ html.site-content-protected img {
 .news-content h3 {
   color: #0f172a;
 }
+
 .blog-content a,
 .news-content a {
   color: var(--primary);
@@ -74,26 +76,34 @@ html.site-content-protected img {
 
 /* Paket ikonu yolculuk sırasında hafif zıplama / yürüyormuş efekti */
 @keyframes package-bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) scale(1);
   }
+
   50% {
     transform: translateY(-8px) scale(1.05);
   }
 }
+
 .animate-package-bounce {
   animation: package-bounce 0.6s ease-in-out infinite;
 }
 
 /* 404: maskot hafif sallanma */
 @keyframes mascot-shrug {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0) rotate(-3deg);
   }
+
   50% {
     transform: translateY(-8px) rotate(3deg);
   }
 }
+
 .animate-mascot-shrug {
   animation: mascot-shrug 2.8s ease-in-out infinite;
 }
@@ -103,15 +113,14 @@ html.site-content-protected img {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
 }
+
 .animate-ticker {
-  animation: ticker-scroll 40s linear infinite;
-}
-.animate-ticker:hover {
-  animation-play-state: paused;
+  animation: ticker-scroll 28s linear infinite;
 }
 
 /* Dikey kayan mesaj paneli – sonsuz döngü */
@@ -119,10 +128,12 @@ html.site-content-protected img {
   0% {
     transform: translateY(0);
   }
+
   100% {
     transform: translateY(-50%);
   }
 }
+
 .animate-ticker-vertical {
   animation: ticker-scroll-vertical 45s linear infinite;
 }

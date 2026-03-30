@@ -31,14 +31,14 @@ export default function PackageTicker({ packages }) {
   return (
     <div className="relative mt-4 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
       <div className="flex items-center gap-1 py-0">
-        <span className="flex shrink-0 items-center gap-1.5 bg-[var(--primary)] px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-white rounded-l-xl">
-          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <span className="flex shrink-0 items-center gap-1 bg-[var(--primary)] px-2 sm:px-3 py-1 text-[11px] sm:text-xs font-semibold uppercase tracking-wide text-white rounded-l-xl">
+          <svg className="hidden sm:block h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
           Son Duraklar
         </span>
         <div className="min-w-0 flex-1 overflow-hidden">
-          <div className="animate-ticker flex w-max items-center gap-8 py-0.5 pl-8">
+          <div className="animate-ticker flex w-max items-center gap-8 py-0.5 pl-4 sm:pl-8">
             {[...items, ...items].map((item, i) => (
               <span
                 key={`${item.id}-${i}`}

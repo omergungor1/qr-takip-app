@@ -5,6 +5,7 @@ export const TURIZM_CATEGORIES = [
   { id: 'gormelisin', label: 'Görmelisin' },
   { id: 'almalisin', label: 'Almalısın' },
   { id: 'tatmalisin', label: 'Tatmalısın' },
+  { id: 'tanismalisin', label: 'Tanışmalısın' },
 ]
 
 export function isValidTurizmCategory(id) {

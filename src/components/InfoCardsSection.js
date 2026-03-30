@@ -114,7 +114,7 @@ export default function InfoCardsSection() {
   const [openItem, setOpenItem] = useState(null)
 
   return (
-    <section className="py-12 sm:py-16 bg-[var(--background)]">
+    <section className="py-2 sm:py-6 bg-[var(--background)]">
       <div className="container mx-auto px-4">
         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center mb-8">
           <aside className="order-2 lg:order-1 w-full max-w-xl mx-auto lg:max-w-none rounded-xl border-2 border-dashed border-[var(--foreground)]/15 bg-[var(--background)]/70 px-4 py-3 text-center">

@@ -31,6 +31,11 @@ const ICONS = {
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
     </svg>
   ),
+  tanismalisin: (
+    <svg className="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+    </svg>
+  ),
 }
 
 const CATEGORIES = TURIZM_CATEGORIES.map((c) => ({
@@ -65,6 +70,7 @@ export default function TurizmKategoriButtons() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+          {/* mx-auto flex w-fit max-w-5xl flex-wrap justify-start gap-3 sm:gap-4 */}
           {CATEGORIES.map((item) => {
             const content = (
               <>
@@ -75,7 +81,7 @@ export default function TurizmKategoriButtons() {
               </>
             )
             const baseClass =
-              'inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border-2 transition-all duration-200 min-w-0 min-h-[44px]'
+              'inline-flex w-[calc(50%-0.375rem)] sm:w-[190px] items-center justify-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border-2 transition-all duration-200 min-w-0 min-h-[44px]'
             const activeClass =
               'border-[var(--primary)]/30 bg-white hover:border-[var(--primary)] hover:bg-[var(--primary)]/5 hover:shadow-md text-[var(--foreground)]'
 

@@ -8,7 +8,7 @@ export default function StatsSection({ stats }) {
   ]
 
   return (
-    <section className="py-12 sm:py-16 bg-white">
+    <section className="py-2 sm:py-6 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-[var(--foreground)] mb-8">
           Proje İstatistikleri

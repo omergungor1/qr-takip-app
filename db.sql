@@ -153,7 +153,8 @@ create type explore_category as enum (
     'kalmalisin',
     'gormelisin',
     'almalisin',
-    'tatmalisin'
+    'tatmalisin',
+    'tanismalisin'
 );
 
 

@@ -85,10 +85,10 @@ export default async function Home() {
         <section className="py-6 sm:py-8 bg-[var(--background)]" id="map">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-2 text-center">
-              Kitapların Konumları
+              Gezgin Kitap Konumları
             </h2>
-            <p className="text-[var(--text-light)] text-center mb-6 max-w-2xl mx-auto">
-              Haritada kitapların son konumlarını ve gezindiği rotayı görün. Bir kitaba tıklayarak pasaport sayfasına gidebilirsiniz.
+            <p className="hidden sm:block text-[var(--text-light)] text-center mb-6 max-w-2xl mx-auto">
+              Haritada Gezgin Kitapların son konumlarını, rotasını, kimin bulup götürdüğünü, kitap pasaportu sekmesine tıklayarak öğrenebilirsiniz.
             </p>
             <HomeClient packages={packages} recentScanMessages={recentScanMessages} />
           </div>
@@ -98,10 +98,10 @@ export default async function Home() {
         <WantedBooksSection wantedBooks={wantedBooks} />
 
 
-        <section className="py-12 sm:py-16 bg-[var(--background)]">
+        <section className="py-2 sm:py-6 bg-[var(--background)]">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Gezgin Kitap Haberleri</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {news.map((n) => (
                 <NewsCard key={n.id} news={n} />
               ))}
@@ -116,7 +116,7 @@ export default async function Home() {
         <StatsSection stats={stats} />
         <InfoCardsSection />
 
-
+        {/* 
         <section className="py-12 sm:py-16 bg-white">
           <div className="container mx-auto px-4">
             <h2 className="text-2xl sm:text-3xl font-bold text-[var(--foreground)] mb-8">Gezgin Haberleri</h2>
@@ -129,7 +129,7 @@ export default async function Home() {
               <p className="text-slate-500 text-center py-8">Henüz blog yazısı yok.</p>
             )}
           </div>
-        </section>
+        </section> */}
 
       </section>
     </>

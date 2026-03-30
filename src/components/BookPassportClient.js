@@ -111,7 +111,7 @@ export default function BookPassportClient({ pkg }) {
           <div className="h-[300px] rounded-xl overflow-hidden border border-slate-200">
             <Map
               mapboxAccessToken={MAPBOX_TOKEN}
-              mapStyle="mapbox://styles/mapbox/light-v11"
+              mapStyle="mapbox://styles/mapbox/navigation-day-v1"
               initialViewState={{
                 longitude: routeCoords[0][0],
                 latitude: routeCoords[0][1],

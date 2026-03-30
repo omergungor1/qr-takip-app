@@ -19,7 +19,7 @@ const externalLinks = [
 
 const gezginYazilariCard = {
   href: '/gezgin-yazilari',
-  label: 'Gezgin Yazıları',
+  label: 'Gezi-Görü-Anlatı',
   description: 'Yolculuk ve okuma üzerine yazılar',
 }
 
@@ -109,11 +109,10 @@ export default function SiteHeader() {
 
       {/* Mobil: açılır menü — max-height + overflow-y-auto ile tüm linkler görünür, gerekirse kaydırılır */}
       <div
-        className={`md:hidden transition-all duration-200 ease-out ${
-          menuOpen
-            ? 'max-h-[min(88vh,720px)] overflow-y-auto opacity-100'
-            : 'max-h-0 overflow-hidden opacity-0'
-        }`}
+        className={`md:hidden transition-all duration-200 ease-out ${menuOpen
+          ? 'max-h-[min(88vh,720px)] overflow-y-auto opacity-100'
+          : 'max-h-0 overflow-hidden opacity-0'
+          }`}
       >
         <nav className="container mx-auto px-4 pb-6 pt-1 bg-white border-t border-slate-100">
           <div className="flex flex-col gap-1">
