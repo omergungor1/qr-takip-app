@@ -7,13 +7,13 @@ import Image from 'next/image'
 const navLinks = [
   { href: '/', label: 'Ana Sayfa' },
   { href: '/yol-arkadaslarim', label: 'Yol Arkadaşlarım' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/haber', label: 'Haberler' },
+  // { href: '/blog', label: 'Blog' },
+  { href: '/haber', label: 'Gezgin Kitap Haberleri' },
   { href: '/hakkimizda', label: 'Proje Hakkında' },
 ]
 
 const externalLinks = [
-  { href: 'https://www.turizmatlasitv.com/', label: 'Turizm Atlası', description: "Türkiye'nin kültür ve turizm haberleri burada" },
+  { href: 'https://www.turizmatlasitv.com/', label: 'Turizm Atlası TV', description: "Türkiye'nin kültür ve turizm haberleri burada" },
   { href: 'https://www.gastronomiatlasi.com/', label: 'Gastronomi Atlası', description: "Türkiye'nin mekan ve otelleri" },
 ]
 

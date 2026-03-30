@@ -41,7 +41,7 @@ export default function Footer() {
               </li>
               <li>
                 <a href="https://www.turizmatlasitv.com/" target="_blank" rel="noopener noreferrer" className="block py-1.5 hover:text-[var(--secondary)] transition-colors">
-                  <span className="font-medium text-slate-300">Turizm Atlası</span>
+                  <span className="font-medium text-slate-300">Turizm Atlası TV</span>
                   <span className="block text-xs text-slate-500 mt-0.5">Türkiye'nin kültür ve turizm haberleri burada</span>
                 </a>
               </li>
