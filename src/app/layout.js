@@ -1,5 +1,7 @@
 import { Poppins, Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "../../node_modules/@uiw/react-md-editor/dist/mdeditor.css";
+import "../../node_modules/@uiw/react-markdown-preview/dist/markdown.css";
 import SiteLayoutWrapper from "@/components/SiteLayoutWrapper";
 import SiteContentProtection from "@/components/SiteContentProtection";
 

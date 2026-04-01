@@ -5,9 +5,12 @@ import { TURIZM_CATEGORIES, getTurizmCategoryLabel, isValidTurizmCategory } from
 import { createClient } from '@/lib/supabase-server'
 import { mapExploreRow } from '@/lib/explore-content'
 import { getPublicSiteBase } from '@/lib/site-url'
+import { getStorageUrl } from '@/lib/utils'
 import Breadcrumb from '@/components/Breadcrumb'
 import BlogShareButtons from '@/components/BlogShareButtons'
 import TurizmBlogCard from '@/components/TurizmBlogCard'
+import { contentToHtml } from '@/lib/markdown'
+import GalleryLightbox from '@/components/GalleryLightbox'
 
 function getVideoEmbed(rawUrl) {
   if (!rawUrl) return null
@@ -195,7 +198,11 @@ export default async function KesfetSlugPage({ params }) {
   const base = getPublicSiteBase()
   const path = `/kesfet/${slug}`
   const shareUrl = base ? `${base}${path}` : undefined
-  const html = blog.content || `<p>${blog.description || ''}</p>`
+  const html = blog.content
+    ? await contentToHtml(blog.content)
+    : blog.description
+      ? await contentToHtml(blog.description)
+      : ''
   const cover = blog.cover_url
   const videoEmbed = getVideoEmbed(blog.video_url)
 
@@ -209,6 +216,15 @@ export default async function KesfetSlugPage({ params }) {
     .order('published_at', { ascending: false })
     .limit(3)
   const related = (relatedRows || []).map(mapExploreRow)
+
+  const { data: galleryRows } = await supabase
+    .from('content_galleries')
+    .select('id, image_url, sort_order')
+    .eq('content_type', 'explore')
+    .eq('content_id', blog.id)
+    .order('sort_order', { ascending: true })
+    .limit(10)
+  const galleryImages = (galleryRows || []).map((g) => getStorageUrl(g.image_url)).filter(Boolean)
 
   const absoluteCover = cover ? (cover.startsWith('http') ? cover : base ? `${base}${cover}` : undefined) : undefined
   const pageUrlForSchema = base ? `${base}${path}` : undefined
@@ -311,6 +327,8 @@ export default async function KesfetSlugPage({ params }) {
               )}
 
               <div className="blog-content prose prose-slate prose-lg max-w-none text-slate-800 [&_p]:text-slate-700 [&_li]:text-slate-700" dangerouslySetInnerHTML={{ __html: html }} />
+              {/* Görsel galerisi */}
+              <GalleryLightbox images={galleryImages} title={blog.title} />
               <div className="mt-10 sm:mt-12">
                 <BlogShareButtons url={shareUrl} title={blog.title} />
               </div>

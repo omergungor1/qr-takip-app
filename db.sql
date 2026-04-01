@@ -226,32 +226,24 @@ create index idx_explore_published_at
 on explore_contents(published_at desc);
 
 
-create or replace function update_updated_at_column()
-returns trigger as $$
-begin
-   new.updated_at = now();
-   return new;
-end;
-$$ language 'plpgsql';
 
-create trigger update_explore_updated_at
-before update on explore_contents
-for each row
-execute procedure update_updated_at_column();
+create type content_type as enum (
+  'explore',
+  'blog',
+  'news'
+);
 
-alter table explore_contents enable row level security;
+create table content_galleries (
+  id uuid primary key default uuid_generate_v4(),
 
-create policy "explore_public_published_select"
-on explore_contents
-for select
-to anon, authenticated
-using (status = 'published');
+  content_id uuid not null, -- blog/news/explore id
+  content_type content_type not null,
 
-create policy "explore_admin_full_access"
-on explore_contents
-for all
-to authenticated
-using (true)
-with check (true);
+  image_url text not null, -- supabase storage path
+  caption text,
 
+  sort_order int default 0,
+
+  created_at timestamptz default now()
+);
 
