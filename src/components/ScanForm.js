@@ -46,7 +46,8 @@ export default function ScanForm({ package: pkg }) {
 
     setLoading(true)
     const supabase = createClient()
-    let imagePath = null
+    const defaultCityImagePath = `sehir-gorsel/${province.id}.png`
+    let imagePath = defaultCityImagePath
 
     if (file) {
       const ext = file.name.split('.').pop() || 'jpg'
