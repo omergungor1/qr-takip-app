@@ -27,7 +27,7 @@ export default function AdminNav({ user }) {
     { href: '/admin', label: 'Panel' },
     { href: '/admin/packages', label: 'Kitaplar' },
     { href: '/admin/news', label: 'Haberler' },
-    { href: '/admin/blogs', label: 'Gezgin Haberleri' },
+    { href: '/admin/blogs', label: 'Gezgin Blogları' },
     { href: '/admin/explore', label: 'Keşfet' },
     { href: '/admin/subscribers', label: 'Aboneler' },
     { href: '/admin/ad-requests', label: 'Reklam talepleri' },

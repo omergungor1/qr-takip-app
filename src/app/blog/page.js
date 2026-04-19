@@ -24,15 +24,15 @@ export default async function BlogListPage() {
   return (
     <div className="bg-slate-50 min-h-screen">
       <div className="container mx-auto px-4 py-8 sm:py-12">
-        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-2">Gezgin Haberleri</h1>
-        <p className="text-slate-600 mb-8">Gezgin kitap hikayeleri ve yazılar</p>
+        <h1 className="text-3xl sm:text-4xl font-bold text-slate-800 mb-2">Gezgin Blogları</h1>
+        <p className="text-slate-600 mb-8">Gezginlerimizden gelen blog yazıları...</p>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {withCover.map((blog) => (
             <BlogCard key={blog.id} blog={blog} />
           ))}
         </div>
         {(!blogs || blogs.length === 0) && (
-          <p className="text-slate-500 text-center py-16">Henüz gezgin haber yazısı yok.</p>
+          <p className="text-slate-500 text-center py-16">Henüz gezgin blog yazısı yok.</p>
         )}
       </div>
     </div>

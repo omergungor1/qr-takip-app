@@ -8,10 +8,10 @@ export async function generateMetadata({ params }) {
   const { slug } = await params
   const row = await getBlogPostBySlug(slug)
   const title = row?.blog?.title
-  return { title: title ? `${title} | GezginKitap` : 'Blog | GezginKitap' }
+  return { title: title ? `${title} | Gezi-Görü-Anlatı | GezginKitap` : 'Gezi-Görü-Anlatı | GezginKitap' }
 }
 
-export default async function BlogSlugPage({ params }) {
+export default async function GezginBloglariSlugPage({ params }) {
   const { slug } = await params
   const row = await getBlogPostBySlug(slug)
   if (!row) notFound()
@@ -28,10 +28,10 @@ export default async function BlogSlugPage({ params }) {
       gezgin={gezgin}
       breadcrumbItems={[
         { label: 'Ana sayfa', href: '/' },
-        { label: 'Blog', href: '/blog' },
+        { label: 'Gezi-Görü-Anlatı', href: '/gezgin-yazilari' },
         { label: blog.title },
       ]}
-      backLink={{ href: '/blog', label: 'Tüm bloglar' }}
+      backLink={{ href: '/gezgin-yazilari', label: 'Tüm gezgin yazıları' }}
     />
   )
 }

@@ -72,18 +72,30 @@ create table news (
 create index idx_news_is_active on news(is_active);
 create index idx_news_slug on news(slug);
 
+
+create table gezginler (
+    id uuid primary key default uuid_generate_v4(),
+    name text not null,
+    description text,
+    cover_image text, -- Storage path (uploads bucket): gezginler/<uuid>.<ext> veya null
+    created_at timestamptz default now()
+);
+create index idx_gezginler_created_at on gezginler(created_at desc);
+
 create table blogs (
     id uuid primary key default uuid_generate_v4(),
     title text not null,
     slug text unique not null,
     content text not null,
     cover_image text,
+    gezgin_id uuid references gezginler(id) on delete set null,
     is_active boolean default true,
     published_at timestamptz,
     created_at timestamptz default now()
 );
 create index idx_blogs_is_active on blogs(is_active);
 create index idx_blogs_slug on blogs(slug);
+create index idx_blogs_gezgin on blogs(gezgin_id);
 
 create table settings (
     key text primary key,
@@ -124,25 +136,6 @@ insert into packages (code, qr_slug, title)
 values
 ('0001','0001','Demo Paket 1'),
 ('0002','0002','Demo Paket 2');
-
--- Mevcut veritabanında subscribers zaten varsa ve RLS yoksa (Supabase SQL Editor):
--- alter table subscribers enable row level security;
--- create policy "subscribers_anon_insert_only" on subscribers for insert to anon with check (true);
--- Admin panelinde listelemek için (yalnızca giriş yapmış kullanıcılar):
--- create policy "subscribers_authenticated_select" on subscribers for select to authenticated using (true);
-
--- Mevcut veritabanına sponsor + subscribers eklemek için (Supabase SQL Editor'da çalıştırın):
--- alter table packages add column if not exists sponsor_name text;
--- alter table packages add column if not exists sponsor_logo text;
--- alter table packages add column if not exists sponsor_url text;
--- create table if not exists subscribers (id uuid primary key default uuid_generate_v4(), email text unique not null, created_at timestamptz default now());
--- create index if not exists idx_subscribers_email on subscribers(email);
-
--- Örnek sponsorlu kitap (logo public/sponsors altındaki dosya adıyla):
--- update packages set sponsor_name = 'Özdilek', sponsor_logo = 'sponsors/ozdilek-logo.webp', sponsor_url = 'https://www.ozdilek.com.tr' where code = '0001';
--- update packages set sponsor_name = 'Opet', sponsor_logo = 'sponsors/Opet-Logo.png', sponsor_url = 'https://www.opet.com.tr' where code = '0002';
-
-
 
 
 

@@ -29,7 +29,7 @@ async function getData() {
   const blogs = (blogsRes.data || []).map((b) => ({ ...b, cover_image: b.cover_image ? getStorageUrl(b.cover_image) : getStorageUrl(`blogs/${b.id}.jpg`) }))
   const allScans = scansRes.data || []
 
-  const recentScanMessages = allScans.slice(0, 20).map((s) => ({
+  const recentScanMessages = allScans.slice(0, 20).filter((s) => s.message).map((s) => ({
     id: s.id,
     date: new Date(s.created_at).toLocaleDateString('tr-TR', {
       day: 'numeric',

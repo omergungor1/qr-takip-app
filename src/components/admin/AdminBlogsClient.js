@@ -1,20 +1,51 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import dynamic from 'next/dynamic'
+import remarkBreaks from 'remark-breaks'
 import { createClient } from '@/lib/supabase'
 import { getStorageUrl } from '@/lib/utils'
 
-export default function AdminBlogsClient({ blogs: initialBlogs }) {
+const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false })
+
+/** Başlıktan URL slug: TR harfleri İngilizce karşılığına çevrilir (ç→c, ş→s, ı→i, …) */
+function slugFromTitle(t) {
+  const lower = String(t).trim().toLocaleLowerCase('tr-TR')
+  const ascii = lower
+    .replace(/ğ/g, 'g')
+    .replace(/ü/g, 'u')
+    .replace(/ş/g, 's')
+    .replace(/ı/g, 'i')
+    .replace(/ö/g, 'o')
+    .replace(/ç/g, 'c')
+  return ascii
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '')
+}
+
+export default function AdminBlogsClient({ blogs: initialBlogs, gezginler: initialGezginler = [] }) {
   const [blogs, setBlogs] = useState(initialBlogs)
+  const [gezginler, setGezginler] = useState(initialGezginler)
   const [showForm, setShowForm] = useState(false)
   const [editing, setEditing] = useState(null)
   const [title, setTitle] = useState('')
   const [slug, setSlug] = useState('')
   const [content, setContent] = useState('')
+  const [gezginId, setGezginId] = useState('')
   const [coverImage, setCoverImage] = useState(null)
   const [showCoverPicker, setShowCoverPicker] = useState(false)
   const [publishedAt, setPublishedAt] = useState('')
   const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    setBlogs(initialBlogs)
+  }, [initialBlogs])
+
+  useEffect(() => {
+    setGezginler(initialGezginler)
+  }, [initialGezginler])
 
   const supabase = createClient()
 
@@ -23,6 +54,7 @@ export default function AdminBlogsClient({ blogs: initialBlogs }) {
     setTitle('')
     setSlug('')
     setContent('')
+    setGezginId('')
     setCoverImage(null)
     setShowCoverPicker(false)
     setPublishedAt('')
@@ -46,10 +78,9 @@ export default function AdminBlogsClient({ blogs: initialBlogs }) {
     }
   }, [selectedCoverPreviewUrl])
 
-  const slugFromTitle = (t) => t.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
-
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!content.trim()) return
     setSaving(true)
     let coverPath = editing?.cover_image || null
     if (coverImage) {
@@ -62,6 +93,7 @@ export default function AdminBlogsClient({ blogs: initialBlogs }) {
       slug: slug.trim() || slugFromTitle(title),
       content: content.trim(),
       cover_image: coverPath,
+      gezgin_id: gezginId || null,
       published_at: publishedAt || null,
       is_active: true,
     }
@@ -90,11 +122,14 @@ export default function AdminBlogsClient({ blogs: initialBlogs }) {
     setTitle(item.title)
     setSlug(item.slug)
     setContent(item.content)
+    setGezginId(item.gezgin_id ? String(item.gezgin_id) : '')
     setCoverImage(null)
     setShowCoverPicker(false)
     setPublishedAt(item.published_at ? item.published_at.slice(0, 16) : '')
     setShowForm(true)
   }
+
+  const gezginNameById = (id) => gezginler.find((g) => String(g.id) === String(id))?.name
 
   return (
     <div className="space-y-6">
@@ -107,7 +142,7 @@ export default function AdminBlogsClient({ blogs: initialBlogs }) {
           }}
           className="rounded-xl bg-amber-500 text-white px-4 py-2 font-medium"
         >
-          Yeni Gezgin Haber
+          Yeni gezgin blogu
         </button>
       )}
 
@@ -122,8 +157,34 @@ export default function AdminBlogsClient({ blogs: initialBlogs }) {
             <input value={slug} onChange={(e) => setSlug(e.target.value)} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white placeholder:text-slate-400" />
           </div>
           <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Gezgin</label>
+            <select
+              value={gezginId}
+              onChange={(e) => setGezginId(e.target.value)}
+              className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white"
+            >
+              <option value="">Seçin (isteğe bağlı)</option>
+              {gezginler.map((g) => (
+                <option key={g.id} value={g.id}>
+                  {g.name}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-slate-500 mt-1">Yazının hangi gezgine ait olduğunu belirtmek için yukarıdaki Gezginler bölümünden profil ekleyin.</p>
+          </div>
+          <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">İçerik</label>
-            <textarea value={content} onChange={(e) => setContent(e.target.value)} rows={5} className="w-full rounded-lg border border-slate-300 px-3 py-2 text-slate-900 bg-white placeholder:text-slate-400" required />
+            <div data-color-mode="light" className="rounded-lg border border-slate-300 bg-white overflow-hidden">
+              <MDEditor
+                value={content}
+                onChange={(v) => setContent(v || '')}
+                height={420}
+                preview="live"
+                visibleDragbar
+                previewOptions={{ remarkPlugins: [remarkBreaks] }}
+              />
+            </div>
+            <p className="text-xs text-slate-500 mt-2">Markdown ile yazabilirsin; önizleme canlı güncellenir.</p>
           </div>
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Manşet Fotoğrafı</label>
@@ -229,6 +290,9 @@ export default function AdminBlogsClient({ blogs: initialBlogs }) {
                     <div className="min-w-0">
                       <p className="font-medium text-slate-800 truncate">{b.title}</p>
                       <p className="text-sm text-slate-500 truncate">{b.slug}</p>
+                      {b.gezgin_id && gezginNameById(b.gezgin_id) ? (
+                        <p className="text-xs text-emerald-700 mt-0.5 truncate">Gezgin: {gezginNameById(b.gezgin_id)}</p>
+                      ) : null}
                     </div>
                   </div>
 
@@ -247,11 +311,10 @@ export default function AdminBlogsClient({ blogs: initialBlogs }) {
                     <button
                       type="button"
                       onClick={() => toggleActive(b)}
-                      className={`text-xs font-semibold px-3 py-2 rounded-lg border transition-colors ${
-                        b.is_active
-                          ? 'bg-green-50 text-green-800 border-green-200 hover:bg-green-100'
-                          : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
-                      }`}
+                      className={`text-xs font-semibold px-3 py-2 rounded-lg border transition-colors ${b.is_active
+                        ? 'bg-green-50 text-green-800 border-green-200 hover:bg-green-100'
+                        : 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200'
+                        }`}
                     >
                       {b.is_active ? 'Aktif' : 'Pasif'}
                     </button>
